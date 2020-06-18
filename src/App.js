@@ -3,8 +3,8 @@ import {Switch, Route} from 'react-router-dom';
 
 import './App.css';
 
-import Monsters from './components/Monsters/Monsters';
-import Monster from './components/Monster/Monster';
+import Monsters from './pages/Monsters/Monsters';
+import Monster from './pages/Monster/Monster';
 
 const App = () => {
   return (

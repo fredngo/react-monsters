@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MonstersAPI from '../../services/MonstersAPI';
 
-import MonsterRow from '../MonsterRow/MonsterRow';
+import MonsterRow from '../../components/MonsterRow/MonsterRow';
 
 class Monsters extends Component {
 
