@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+
 import MonstersAPI from '../../services/MonstersAPI';
 
 import MonsterRow from '../../components/MonsterRow/MonsterRow';
@@ -21,6 +23,9 @@ class Monsters extends Component {
       <>
         <h1>Monsters for Hire, Inc.</h1>
   
+        <Link to={'/monsters/new'}>New Monster</Link>
+        <br />
+
         <table>
           <thead>
             <tr>
