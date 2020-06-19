@@ -9,6 +9,7 @@ class MonsterNew extends Component {
 
   state = {
     monster: {},
+    errors: [],
     redirect: {
       pathname: false,
       notice: '',
@@ -26,11 +27,15 @@ class MonsterNew extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const monster = await MonstersAPI.create(this.state.monster);
-    this.setState({redirect: {
-      pathname: `/monsters/${monster.id}`,
-      notice: 'Monster was successfully created.'
-    }});
+    const response = await MonstersAPI.create(this.state.monster);
+    if (response.id)
+      this.setState({redirect: {
+        pathname: `/monsters/${response.id}`,
+        notice: 'Monster was successfully created.'
+      }});
+    else {
+      this.setState({errors: response});
+    }
   }
 
   render() {
@@ -49,7 +54,9 @@ class MonsterNew extends Component {
         <MonsterForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          buttonText='Create Monster' />
+          buttonText='Create Monster'
+          errors={this.state.errors}
+        />
       </>
     );
   }

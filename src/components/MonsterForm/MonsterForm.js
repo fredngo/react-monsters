@@ -1,9 +1,21 @@
 import React from 'react';
 
-const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, buttonText}) => {
+const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, buttonText, errors}) => {
+
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {
+          !!!errors.length ? null :
+          <div id="error_explanation">
+            <h2>{errors.length} error(s) prohibited this monster from being saved:</h2>
+
+            <ul>
+              { errors.map( (m, i) => <li key={i}>{m}</li> ) }
+            </ul>
+          </div>
+        }
+
         <div>
           <label>
             <span>Name</span>

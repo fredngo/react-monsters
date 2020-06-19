@@ -28,7 +28,7 @@ class Monsters extends Component {
         <Link to={'/monsters/new'}>New Monster</Link>
         <br />
 
-        { this.state.monsters.length?
+        { !this.state.monsters.length ? null :
           <table>
             <thead>
               <tr>
@@ -43,7 +43,6 @@ class Monsters extends Component {
               {allMonsterRows}
             </tbody>
           </table>
-          : <></>
         }
       </>
     );
