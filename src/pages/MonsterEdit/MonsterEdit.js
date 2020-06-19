@@ -33,13 +33,13 @@ class MonsterEdit extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const response = await MonstersAPI.update(this.state.monster);
-    if (response.id)
+    if (!response.errors)
       this.setState({redirect: {
-        pathname: `/monsters/${this.state.monster.id}`,
+        pathname: `/monsters/${response.id}`,
         notice: 'Monster was successfully updated.'
       }});
     else {
-      this.setState({errors: response});
+      this.setState({errors: response.errors});
     }
   }
 
