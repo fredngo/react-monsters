@@ -14,7 +14,11 @@ const show = (id) => {
 }
 
 const create = (monster) => {
-  console.log('Create Monster')
+  return fetch(collectionUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({monster}),
+    }).then(response => response.json());
 }
 
 const update = (monster) => {
