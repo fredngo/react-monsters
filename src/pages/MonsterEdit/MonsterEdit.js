@@ -9,7 +9,10 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
-    redirectTo: false
+    redirect: {
+      pathname: false,
+      notice: '',
+    },
   }
   
   async componentDidMount() {
@@ -29,11 +32,18 @@ class MonsterEdit extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     await MonstersAPI.update(this.state.monster);
-    this.setState({redirectTo: `/monsters/${this.state.monster.id}`})
+    this.setState({redirect: {
+      pathname: `/monsters/${this.state.monster.id}`,
+      notice: 'Monster was successfully updated.'
+    }});
   }
 
   render() {
-    if (this.state.redirectTo) return <Redirect to={this.state.redirectTo} />
+    if (this.state.redirect.pathname)
+      return <Redirect to={{
+        pathname: this.state.redirect.pathname,
+        state: { notice: this.state.redirect.notice }
+      }} />
 
     const {id} = this.state.monster;
     if (!id) return <></>

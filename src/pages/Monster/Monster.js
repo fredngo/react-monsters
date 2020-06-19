@@ -23,7 +23,7 @@ class Monster extends Component {
     await MonstersAPI.destroy(this.state.monster.id);
     this.setState({redirect: {
       pathname: '/monsters',
-      notice: 'Monster was successfully deleted'
+      notice: 'Monster was successfully deleted.'
     }});
   }
 
@@ -41,6 +41,8 @@ class Monster extends Component {
 
     return (
       <>
+        <p id="notice">{this.props.redirect_state?.notice ? this.props.redirect_state.notice : ''}</p>
+
         <Link to='/'>Back</Link>
   
         <h1>{name}</h1>
