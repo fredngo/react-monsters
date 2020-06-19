@@ -1,4 +1,4 @@
-const apiKey = 'awesomesauce';
+const apiKey = process.env.REACT_APP_MONSTERS_API_KEY;
 const baseUrl = 'http://react-monsters-api.herokuapp.com/api/monsters';
 const collectionUrl = `${baseUrl}?api_key=${apiKey}`;
 const memberUrl = (id) => `${baseUrl}/${id}?api_key=${apiKey}`;
