@@ -10,8 +10,15 @@ class Monster extends Component {
   }
   
   async componentDidMount() {
-    const monster = await MonstersAPI.show(this.props.id);
+    const {id} = this.props.match.params;
+    const monster = await MonstersAPI.show(id);
     this.setState({monster})
+  }
+
+   handleDelete = async e => {
+    e.preventDefault();
+    await MonstersAPI.destroy(this.state.monster.id);
+    this.props.history.push('/monsters');
   }
 
   render() {
@@ -31,7 +38,7 @@ class Monster extends Component {
   
         <Link to={`/monsters/${id}/edit`}>Edit</Link>
         &nbsp;
-        <Link to={`/monsters/${id}`}>Delete</Link>
+        <Link to={`/monsters/${id}`} onClick={this.handleDelete}>Delete</Link>
       </>
     );
   }
