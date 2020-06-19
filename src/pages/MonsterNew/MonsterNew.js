@@ -9,7 +9,10 @@ class MonsterNew extends Component {
 
   state = {
     monster: {},
-    redirectTo: false
+    redirect: {
+      pathname: false,
+      notice: '',
+    },
   }
 
   handleChange = e => {
@@ -24,11 +27,18 @@ class MonsterNew extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const monster = await MonstersAPI.create(this.state.monster);
-    this.setState({redirectTo: `/monsters/${monster.id}`})
+    this.setState({redirect: {
+      pathname: `/monsters/${monster.id}`,
+      notice: 'Monster was successfully created.'
+    }});
   }
 
   render() {
-    if (this.state.redirectTo) return <Redirect to={this.state.redirectTo} />
+    if (this.state.redirect.pathname)
+      return <Redirect to={{
+        pathname: this.state.redirect.pathname,
+        state: { notice: this.state.redirect.notice }
+      }} />
 
     return (
       <>
