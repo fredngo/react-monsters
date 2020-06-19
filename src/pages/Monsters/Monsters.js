@@ -28,23 +28,23 @@ class Monsters extends Component {
         <Link to={'/monsters/new'}>New Monster</Link>
         <br />
 
-        <table>
-          <thead>
-            { this.state.monsters.length?
+        { this.state.monsters.length?
+          <table>
+            <thead>
               <tr>
                 <th>&nbsp;</th>
                 <th>Name</th>
                 <th>Home</th>
                 <th>Creepiness</th>
               </tr>
-              : <></>
-            }
-          </thead>
-  
-          <tbody>
-            {allMonsterRows}
-          </tbody>
-        </table>
+            </thead>
+    
+            <tbody>
+              {allMonsterRows}
+            </tbody>
+          </table>
+          : <></>
+        }
       </>
     );
   }
