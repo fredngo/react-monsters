@@ -17,7 +17,7 @@ const App = () => {
           render={ routeProps => <MonsterEdit id={routeProps.match.params.id} />}
         />
         <Route path="/monsters/:id"
-          render={ routeProps => <Monster {...routeProps} />}
+          render={ routeProps => <Monster id={routeProps.match.params.id} />}
         />
         <Route path="/">
           <Monsters />

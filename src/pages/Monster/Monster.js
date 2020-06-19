@@ -1,27 +1,30 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
 class Monster extends Component {
 
   state = {
-    monster: {}
+    monster: {},
+    toMonsters: false
   }
   
   async componentDidMount() {
-    const {id} = this.props.match.params;
-    const monster = await MonstersAPI.show(id);
+    const monster = await MonstersAPI.show(this.props.id);
     this.setState({monster})
   }
 
-   handleDelete = async e => {
+  handleDelete = async e => {
     e.preventDefault();
     await MonstersAPI.destroy(this.state.monster.id);
-    this.props.history.push('/monsters');
+    this.setState({toMonsters: true})
   }
 
   render() {
+    if (this.state.toMonsters) return <Redirect to='/monsters' />
+    if (!this.state.monster.id) return <></>
+
     const {id, name, home, creepiness} = this.state.monster;
     const imgSrc = `https://robohash.org/${id}?set=set2&size=200x200`;
 
