@@ -18,7 +18,11 @@ const create = (monster) => {
 }
 
 const update = (monster) => {
-  console.log('Update Monster')
+  return fetch(memberUrl(monster.id), {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({monster}),
+    }).then(response => response.json());
 }
 
 const destroy = (id) => {

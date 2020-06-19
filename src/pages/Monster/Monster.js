@@ -7,7 +7,7 @@ class Monster extends Component {
 
   state = {
     monster: {},
-    toMonsters: false
+    redirectTo: false
   }
   
   async componentDidMount() {
@@ -18,11 +18,11 @@ class Monster extends Component {
   handleDelete = async e => {
     e.preventDefault();
     await MonstersAPI.destroy(this.state.monster.id);
-    this.setState({toMonsters: true})
+    this.setState({redirectTo: '/monsters'})
   }
 
   render() {
-    if (this.state.toMonsters) return <Redirect to='/monsters' />
+    if (this.state.redirectTo) return <Redirect to={this.state.redirectTo} />
     if (!this.state.monster.id) return <></>
 
     const {id, name, home, creepiness} = this.state.monster;
@@ -30,7 +30,7 @@ class Monster extends Component {
 
     return (
       <>
-        <Link to={`/`}>Back</Link>
+        <Link to='/'>Back</Link>
   
         <h1>{name}</h1>
   
