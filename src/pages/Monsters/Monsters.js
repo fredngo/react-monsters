@@ -21,6 +21,8 @@ class Monsters extends Component {
 
     return (
       <>
+        <p id="notice">{this.props.redirect_state?.notice ? this.props.redirect_state.notice : ''}</p>
+        
         <h1>Monsters for Hire, Inc.</h1>
   
         <Link to={'/monsters/new'}>New Monster</Link>

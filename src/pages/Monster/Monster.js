@@ -7,7 +7,10 @@ class Monster extends Component {
 
   state = {
     monster: {},
-    redirectTo: false
+    redirect: {
+      pathname: false,
+      notice: '',
+    },
   }
   
   async componentDidMount() {
@@ -18,11 +21,19 @@ class Monster extends Component {
   handleDelete = async e => {
     e.preventDefault();
     await MonstersAPI.destroy(this.state.monster.id);
-    this.setState({redirectTo: '/monsters'})
+    this.setState({redirect: {
+      pathname: '/monsters',
+      notice: 'Monster was successfully deleted'
+    }});
   }
 
   render() {
-    if (this.state.redirectTo) return <Redirect to={this.state.redirectTo} />
+    if (this.state.redirect.pathname)
+      return <Redirect to={{
+        pathname: this.state.redirect.pathname,
+        state: { notice: this.state.redirect.notice }
+      }} />
+
     if (!this.state.monster.id) return <></>
 
     const {id, name, home, creepiness, bio} = this.state.monster;

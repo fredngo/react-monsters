@@ -19,9 +19,9 @@ const App = () => {
         <Route path="/monsters/:id"
           render={ routeProps => <Monster id={routeProps.match.params.id} />}
         />
-        <Route path="/">
-          <Monsters />
-        </Route>
+        <Route path="/"
+          render={ routeProps => <Monsters redirect_state={routeProps.location.state} />}
+        />
       </Switch>
     </div>
   );
