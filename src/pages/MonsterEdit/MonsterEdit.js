@@ -9,6 +9,7 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
+    errors: [],
     redirect: {
       pathname: false,
       notice: '',
@@ -31,11 +32,15 @@ class MonsterEdit extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    await MonstersAPI.update(this.state.monster);
-    this.setState({redirect: {
-      pathname: `/monsters/${this.state.monster.id}`,
-      notice: 'Monster was successfully updated.'
-    }});
+    const response = await MonstersAPI.update(this.state.monster);
+    if (response.id)
+      this.setState({redirect: {
+        pathname: `/monsters/${this.state.monster.id}`,
+        notice: 'Monster was successfully updated.'
+      }});
+    else {
+      this.setState({errors: response});
+    }
   }
 
   render() {
@@ -58,7 +63,9 @@ class MonsterEdit extends Component {
           {...this.state.monster}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          buttonText='Update Monster' />
+          buttonText='Update Monster' 
+          errors={this.state.errors}
+        />
       </>
     );
   }
