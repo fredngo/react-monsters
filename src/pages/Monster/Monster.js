@@ -25,7 +25,7 @@ class Monster extends Component {
     if (this.state.redirectTo) return <Redirect to={this.state.redirectTo} />
     if (!this.state.monster.id) return <></>
 
-    const {id, name, home, creepiness} = this.state.monster;
+    const {id, name, home, creepiness, bio} = this.state.monster;
     const imgSrc = `https://robohash.org/${id}?set=set2&size=200x200`;
 
     return (
@@ -39,6 +39,9 @@ class Monster extends Component {
         <h2>Home: {home}</h2>
         <h2>Creepiness: {creepiness}</h2>
   
+        <h2>Bio:</h2>
+        <p>{bio}</p>
+
         <Link to={`/monsters/${id}/edit`}>Edit</Link>
         &nbsp;
         <Link to={`/monsters/${id}`} onClick={this.handleDelete}>Delete</Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MonsterForm = ({name, home, creepiness, handleChange, handleSubmit, buttonText}) => {
+const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, buttonText}) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -38,6 +38,17 @@ const MonsterForm = ({name, home, creepiness, handleChange, handleSubmit, button
               defaultValue={creepiness}
               onChange={handleChange}
               required
+            />
+          </label>
+          </div>
+          <div>
+          <label>
+            <span>Bio</span>
+            &nbsp;
+            <textarea
+              name="bio"
+              defaultValue={bio}
+              onChange={handleChange}
             />
           </label>
           </div>
