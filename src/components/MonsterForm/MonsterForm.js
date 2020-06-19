@@ -6,7 +6,7 @@ const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, b
     <>
       <form onSubmit={handleSubmit}>
         {
-          !!!errors.length ? null :
+          !errors.length ? null :
           <div id="error_explanation">
             <h2>{errors.length} error(s) prohibited this monster from being saved:</h2>
 
