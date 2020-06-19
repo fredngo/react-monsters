@@ -30,12 +30,15 @@ class Monsters extends Component {
 
         <table>
           <thead>
-            <tr>
-              <th>&nbsp;</th>
-              <th>Name</th>
-              <th>Home</th>
-              <th>Creepiness</th>
-            </tr>
+            { this.state.monsters.length?
+              <tr>
+                <th>&nbsp;</th>
+                <th>Name</th>
+                <th>Home</th>
+                <th>Creepiness</th>
+              </tr>
+              : <></>
+            }
           </thead>
   
           <tbody>
