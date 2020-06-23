@@ -14,7 +14,7 @@ const show = (id) => {
 }
 
 const create = (monster) => {
-  const body = JSON.stringify({monster});
+  const body = JSON.stringify(monster);
   return fetch(collectionUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -24,7 +24,7 @@ const create = (monster) => {
 }
 
 const update = (monster) => {
-  const body = JSON.stringify({monster});
+  const body = JSON.stringify(monster);
   return fetch(memberUrl(monster.id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
