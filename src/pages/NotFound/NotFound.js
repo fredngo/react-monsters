@@ -1,9 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const NotFound = ({location}) => (
-  <div>
-     <h1>Nothing found for <code>{location.pathname}</code></h1>
-  </div>
+  <>
+    <p id="notice">{location.state?.notice ? location.state.notice : ''}</p>
+    <Link to='/'>Home</Link>
+    <h1>404 Not Found</h1>
+  </>
 );
 
 export default NotFound;

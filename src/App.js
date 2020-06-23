@@ -23,6 +23,7 @@ const App = () => {
         <Route exact path="/"
           render={ routeProps => <Monsters redirect_state={routeProps.location.state} />}
         />
+        <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
     </div>
