@@ -48,7 +48,7 @@ class MonsterNew extends Component {
 
     return (
       <>
-        <Link to={`/monsters`}>Back</Link>
+        <Link to='/'>Back</Link>
   
         <h1>New Monster</h1>
 

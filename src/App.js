@@ -5,6 +5,7 @@ import Monsters from './pages/Monsters/Monsters';
 import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   return (
@@ -19,9 +20,10 @@ const App = () => {
         <Route path="/monsters/:id"
           render={ routeProps => <Monster id={routeProps.match.params.id} redirect_state={routeProps.location.state} />}
         />
-        <Route path="/"
+        <Route exact path="/"
           render={ routeProps => <Monsters redirect_state={routeProps.location.state} />}
         />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );

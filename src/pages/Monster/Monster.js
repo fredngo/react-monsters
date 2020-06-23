@@ -22,7 +22,7 @@ class Monster extends Component {
     e.preventDefault();
     await MonstersAPI.destroy(this.state.monster.id);
     this.setState({redirect: {
-      pathname: '/monsters',
+      pathname: '/',
       notice: 'Monster was successfully deleted.'
     }});
   }
