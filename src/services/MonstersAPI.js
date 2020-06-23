@@ -18,7 +18,8 @@ const create = (monster) => {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({monster}),
-    }).then(response => response.json());
+    })
+    .then(response => response.json());
 }
 
 const update = (monster) => {
@@ -26,7 +27,8 @@ const update = (monster) => {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({monster}),
-    }).then(response => response.json());
+    })
+    .then(response => response.json());
 }
 
 const destroy = (id) => {
