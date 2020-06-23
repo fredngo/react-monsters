@@ -14,19 +14,21 @@ const show = (id) => {
 }
 
 const create = (monster) => {
+  const body = JSON.stringify({monster});
   return fetch(collectionUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({monster}),
+      body,
     })
     .then(response => response.json());
 }
 
 const update = (monster) => {
+  const body = JSON.stringify({monster});
   return fetch(memberUrl(monster.id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({monster}),
+      body,
     })
     .then(response => response.json());
 }
