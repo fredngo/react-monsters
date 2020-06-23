@@ -14,8 +14,15 @@ class Monster extends Component {
   }
   
   async componentDidMount() {
-    const monster = await MonstersAPI.show(this.props.id);
-    this.setState({monster})
+    const response = await MonstersAPI.show(this.props.id);
+    if (!response.error)
+      this.setState({monster: response})
+    else {
+      this.setState({redirect: {
+        pathname: '/404',
+        notice: 'Monster was not found.'
+      }});
+    }
   }
 
   handleDelete = async e => {
