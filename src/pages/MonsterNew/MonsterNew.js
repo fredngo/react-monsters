@@ -28,13 +28,14 @@ class MonsterNew extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const response = await MonstersAPI.create(this.state.monster);
-    if (!response.errors)
+
+    if (!response.error)
       this.setState({redirect: {
         pathname: `/monsters/${response.id}`,
         notice: 'Monster was successfully created.'
       }});
     else {
-      this.setState({errors: response.errors});
+      this.setState({errors: response.error});
     }
   }
 
