@@ -33,6 +33,7 @@ class MonsterEdit extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const response = await MonstersAPI.update(this.state.monster);
+
     if (!response.error)
       this.setState({redirect: {
         pathname: `/monsters/${this.state.monster.id}`,
@@ -60,7 +61,7 @@ class MonsterEdit extends Component {
         <h1>Editing Monster</h1>
 
         <MonsterForm 
-          {...this.state.monster}
+          monster={this.state.monster}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           buttonText='Update Monster' 

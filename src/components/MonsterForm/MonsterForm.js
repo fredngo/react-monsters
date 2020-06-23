@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, buttonText, errors}) => {
+const MonsterForm = ({monster, handleChange, handleSubmit, buttonText, errors}) => {
 
   return (
     <>
@@ -22,7 +22,7 @@ const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, b
             &nbsp;
             <input
               name="name"
-              defaultValue={name}
+              defaultValue={monster.name}
               onChange={handleChange}
               required
             />
@@ -34,7 +34,7 @@ const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, b
             &nbsp;
             <input
               name="home"
-              defaultValue={home}
+              defaultValue={monster.home}
               onChange={handleChange}
               required
             />
@@ -47,7 +47,7 @@ const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, b
             <input
               type="number"
               name="creepiness"
-              defaultValue={creepiness}
+              defaultValue={monster.creepiness}
               onChange={handleChange}
               required
             />
@@ -59,7 +59,7 @@ const MonsterForm = ({name, home, creepiness, bio, handleChange, handleSubmit, b
             &nbsp;
             <textarea
               name="bio"
-              defaultValue={bio}
+              defaultValue={monster.bio}
               onChange={handleChange}
             />
           </label>

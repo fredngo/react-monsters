@@ -8,7 +8,12 @@ import MonsterForm from '../../components/MonsterForm/MonsterForm';
 class MonsterNew extends Component {
 
   state = {
-    monster: {},
+    monster: {
+      name: null,
+      home: null,
+      creepiness: null,
+      bio: null,
+    },
     errors: [],
     redirect: {
       pathname: false,
@@ -53,6 +58,7 @@ class MonsterNew extends Component {
         <h1>New Monster</h1>
 
         <MonsterForm
+          monster={this.state.monster}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           buttonText='Create Monster'
