@@ -35,7 +35,7 @@ class MonsterEdit extends Component {
     const response = await MonstersAPI.update(this.state.monster);
     if (!response.error)
       this.setState({redirect: {
-        pathname: `/monsters/${response.id}`,
+        pathname: `/monsters/${this.state.monster.id}`,
         notice: 'Monster was successfully updated.'
       }});
     else {
