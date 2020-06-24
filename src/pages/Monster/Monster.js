@@ -58,23 +58,28 @@ class Monster extends Component {
     if (!this.state.monster.id) return <></>
 
     const {id, name, home, creepiness, bio} = this.state.monster;
-    const imgSrc = `https://robohash.org/${id}?set=set2&size=200x200`;
+    const imgSrc = `https://robohash.org/${id}?set=set2&size=300x300`;
 
     return (
       <>
-        <h1 className="mt-4">{name}</h1>
-  
-        <img src={imgSrc} alt='Monster Pic' />
+        <div className="container">
+          <div className="m-5 card text-center">
+            <h3 className="card-header">
+              {name}
+            </h3>
+            <div className="card-body">
+              <img className="m-3" src={imgSrc} alt='Monster Pic' />
 
-        <h2>Home: {home}</h2>
-        <h2>Creepiness: {creepiness}</h2>
-  
-        <h2>Bio:</h2>
-        <p>{bio}</p>
+              <h5 className="card-title">{home}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">Creepiness: {creepiness}</h6>
+              <p className="card-text">{bio}</p>
 
-        <Link to={`/monsters/${id}/edit`}>Edit</Link>
-        &nbsp;
-        <Link to={`/monsters/${id}`} onClick={this.handleDelete}>Delete</Link>
+              <Link className="btn btn-primary" to={`/monsters/${id}/edit`}>Edit</Link>
+              &nbsp;
+              <Link className="btn btn-danger" to={`/monsters/${id}`} onClick={this.handleDelete}>Delete</Link>
+            </div>
+          </div>
+        </div>
       </>
     );
   }
