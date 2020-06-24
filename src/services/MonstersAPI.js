@@ -1,11 +1,29 @@
-const baseUrl = 'https://monsters-robots-api.herokuapp.com/api/monsters';
+const baseUrl = 'https://parseapi.back4app.com/classes/Monster';
 const collectionUrl = `${baseUrl}`;
 const memberUrl = id => `${baseUrl}/${id}`;
 
 const authHeaders = {
-  'X-MONSTERS-API-ID': process.env.REACT_APP_MONSTERS_API_ID,
-  'X-MONSTERS-API-SECRET': process.env.REACT_APP_MONSTERS_API_SECRET
+  'X-Parse-Application-Id': process.env.REACT_APP_PARSE_APPLICATION_ID,
+  'X-Parse-Javascript-Key': process.env.REACT_APP_PARSE_JAVASCRIPT_KEY,
 };
+
+const reformatResponseData = response => {
+  if (!response.data) return response;
+
+  // Only pick out the fields we need, drop the rest, or else we could have used ...rest
+  const reformatMonster = monster => {
+    const {objectId: id, name, home, creepiness, bio} = monster;
+    return {id, name, home, creepiness, bio};
+  }
+
+  let data = response.data;
+  if (data.results && Array.isArray(data.results))
+    data = data.results.map(m => reformatMonster(m));
+  else
+    data = reformatMonster(data);
+
+  return {data};
+}
 
 const handleAPIErrors = response => {
   if (!response.ok) {
@@ -22,14 +40,16 @@ const index = () => {
   return fetch(collectionUrl, {
       headers: authHeaders,
     })
-    .then(handleAPIErrors);
+    .then(handleAPIErrors)
+    .then(reformatResponseData);
 }
 
 const show = id => {
   return fetch(memberUrl(id), {
       headers: authHeaders,
     })
-    .then(handleAPIErrors);
+    .then(handleAPIErrors)
+    .then(reformatResponseData);
 }
 
 const create = monster => {
@@ -38,7 +58,8 @@ const create = monster => {
       headers: {'Content-Type': 'application/json', ...authHeaders},
       body: JSON.stringify(monster),
     })
-    .then(handleAPIErrors);
+    .then(handleAPIErrors)
+    .then(reformatResponseData);
 }
 
 const update = monster => {
