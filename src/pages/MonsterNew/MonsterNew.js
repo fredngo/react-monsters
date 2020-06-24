@@ -11,12 +11,11 @@ class MonsterNew extends Component {
     monster: {},
   }
 
-  setMonster = m =>
-    this.setState( prevState => {
-      return {monster: {...prevState.monster, ...m}};
-    });
+  setMonster = monster =>
+    this.setState({monster});
 
-  callApi = () => MonstersAPI.create(this.state.monster);
+  callApi = () =>
+    MonstersAPI.create(this.state.monster);
 
   render() {
     return (
@@ -38,3 +37,35 @@ class MonsterNew extends Component {
 }
 
 export default MonsterNew;
+
+// import React, {useState} from 'react';
+// import {Link} from 'react-router-dom';
+
+// import MonstersAPI from '../../services/MonstersAPI';
+
+// import MonsterForm from '../../components/MonsterForm/MonsterForm';
+
+// const MonsterNew = () => {
+
+//   const [monster, setMonster] = useState({});
+
+//   const callApi = () => MonstersAPI.create(monster);
+
+//   return (
+//     <>
+//       <Link to='/'>Back</Link>
+
+//       <h1>New Monster</h1>
+
+//       <MonsterForm
+//         monster={monster}
+//         setMonster={setMonster}
+//         callApi={callApi}
+//         buttonText='Create Monster'
+//         successNotice='Monster was successfully created.'
+//       />
+//     </>
+//   );
+// }
+
+// export default MonsterNew;
