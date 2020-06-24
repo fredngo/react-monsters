@@ -69,7 +69,6 @@ class Monster extends Component {
             </h3>
             <div className="card-body">
               <img className="m-3" src={imgSrc} alt='Monster Pic' />
-
               <h5 className="card-title">{home}</h5>
               <h6 className="card-subtitle mb-2 text-muted">Creepiness: {creepiness}</h6>
               <p className="card-text">{bio}</p>
