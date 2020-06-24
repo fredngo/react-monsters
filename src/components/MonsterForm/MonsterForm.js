@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 class MonsterForm extends Component {
 
@@ -43,13 +43,13 @@ class MonsterForm extends Component {
     const {pathname, notice} = this.state.redirect;
     if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
 
-    const {monster, buttonText} = this.props;
+    const {monster, buttonText, cancelPath} = this.props;
     return (
       <>
         <form onSubmit={this.handleSubmit}>
           {
             !this.state.errors.length ? null :
-            <div id="error_explanation">
+            <div className="alert alert-warning">
               <h2>{this.state.errors.length} error(s) prohibited this monster from being saved:</h2>
 
               <ul>
@@ -58,11 +58,11 @@ class MonsterForm extends Component {
             </div>
           }
 
-          <div>
-            <label>
+          <div className="form-group">
+            <label htmlFor="name">
               <span>Name</span>
-              &nbsp;
               <input
+                className="form-control"
                 name="name"
                 defaultValue={monster.name}
                 onChange={this.handleChange}
@@ -70,11 +70,11 @@ class MonsterForm extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="form-group">
             <label>
               <span>Home</span>
-              &nbsp;
               <input
+                className="form-control"
                 name="home"
                 defaultValue={monster.home}
                 onChange={this.handleChange}
@@ -82,11 +82,11 @@ class MonsterForm extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="form-group">
             <label>
               <span>Creepiness</span>
-              &nbsp;
               <input
+                className="form-control"
                 type="number"
                 name="creepiness"
                 defaultValue={monster.creepiness}
@@ -98,15 +98,16 @@ class MonsterForm extends Component {
             <div>
             <label>
               <span>Bio</span>
-              &nbsp;
               <textarea
+                className="form-control"
                 name="bio"
                 defaultValue={monster.bio}
                 onChange={this.handleChange}
               />
             </label>
             </div>
-          <button>{buttonText}</button>
+          <button className="btn btn-primary">{buttonText}</button>
+          <Link className="btn btn-link" to={cancelPath}>Cancel</Link>
         </form>
       </>
     );

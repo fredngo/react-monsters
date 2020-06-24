@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -51,62 +51,24 @@ class MonsterEdit extends Component {
     if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
 
     return (
-      <>
-        <Link to={`/monsters/${this.state.monster.id}`}>Back</Link>
-  
-        <h1 className="mt-4">Editing Monster</h1>
-
-        <MonsterForm 
-          monster={this.state.monster}
-          setMonster={this.setMonster}
-          callApi={this.callApi}
-          buttonText='Update Monster'
-          redirectNotice='Monster was successfully updated.'
-          redirectTo={this.redirectTo}
-        />
-      </>
+      <div className="container">
+        <div className="row">
+          <h1 className="mt-4">Editing Monster</h1>
+        </div>
+        <div className="row">
+          <MonsterForm 
+            monster={this.state.monster}
+            setMonster={this.setMonster}
+            callApi={this.callApi}
+            buttonText='Update Monster'
+            redirectNotice='Monster was successfully updated.'
+            redirectTo={this.redirectTo}
+            cancelPath={`/monsters/${this.state.monster.id}`}
+          />
+        </div>
+      </div>
     );
   }
 }
 
 export default MonsterEdit;
-
-// import React, {useState, useEffect} from 'react';
-// import {Link} from 'react-router-dom';
-
-// import MonstersAPI from '../../services/MonstersAPI';
-
-// import MonsterForm from '../../components/MonsterForm/MonsterForm';
-
-// const MonsterEdit = ({id}) => {
-
-//   const [monster, setMonster] = useState({});
-
-//   const callApi = () => MonstersAPI.update(monster);
-
-//   useEffect(() => {
-//     const getMonster = async () => {
-//       const monster = await MonstersAPI.show(id);
-//       setMonster(monster);
-//     }
-//     getMonster();
-//   }, []);
-
-//   return (
-//     <>
-//       <Link to={`/monsters/${monster.id}`}>Back</Link>
-
-//       <h1 className="mt-4">Editing Monster</h1>
-
-//       <MonsterForm 
-//         monster={monster}
-//         setMonster={setMonster}
-//         callApi={callApi}
-//         buttonText='Update Monster'
-//         successNotice='Monster was successfully updated.'
-//       />
-//     </>
-//   );
-// }
-
-// export default MonsterEdit;
