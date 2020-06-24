@@ -26,7 +26,7 @@ const create = (monster) => {
 const update = (monster) => {
   const body = JSON.stringify(monster);
   return fetch(memberUrl(monster.id), {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body,
     })
