@@ -26,15 +26,22 @@ class MonsterEdit extends Component {
     `/monsters/${this.state.monster.id}`
 
   async componentDidMount() {
-    const {data} = await MonstersAPI.show(this.props.id);
+    try {
+      const {data} = await MonstersAPI.show(this.props.id);
 
-    if (data) {
-      this.setState({monster: data});
+      if (data) {
+        this.setState({monster: data});
+      }
+      else {
+        this.setState({redirect: {
+          pathname: '/404',
+          notice: 'Monster was not found.'
+        }});
+      }
     }
-    else {
+    catch() {
       this.setState({redirect: {
-        pathname: '/404',
-        notice: 'Monster was not found.'
+        pathname: '/offline'
       }});
     }
   }

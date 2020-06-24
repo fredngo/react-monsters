@@ -7,6 +7,7 @@ import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
 import InternalServerError from './pages/InternalServerError/InternalServerError';
+import Offline from './pages/Offline/Offline';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         />
         <Route path="/404" component={NotFound} />
         <Route path="/500" component={InternalServerError} />
+        <Route path="/offline" component={Offline} />
         <Route component={NotFound} />
       </Switch>
     </div>

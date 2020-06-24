@@ -19,17 +19,23 @@ class MonsterForm extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    try {
+      const {data, errors} = await this.props.callApi();
 
-    const {data, errors} = await this.props.callApi();
-
-    if (data) {
-      this.setState({redirect: {
-        pathname: this.props.redirectTo(data),
-        notice: this.props.redirectNotice
-      }});
+      if (data) {
+        this.setState({redirect: {
+          pathname: this.props.redirectTo(data),
+          notice: this.props.redirectNotice
+        }});
+      }
+      else {
+        this.setState({errors});
+      }
     }
-    else {
-      this.setState({errors});
+    catch() {
+      this.setState({redirect: {
+        pathname: '/offline'
+      }});
     }
   }
 

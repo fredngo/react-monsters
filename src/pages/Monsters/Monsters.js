@@ -16,15 +16,22 @@ class Monsters extends Component {
   }
 
   async componentDidMount() {
-    const {data} = await MonstersAPI.index();
+    try {
+      const {data} = await MonstersAPI.index();
 
-    if (data) {
-      this.setState({monsters: data});
+      if (data) {
+        this.setState({monsters: data});
+      }
+      else {
+        this.setState({redirect: {
+          pathname: '/500',
+          notice: 'Error when fetching monsters.'
+        }});
+      }
     }
-    else {
+    catch() {
       this.setState({redirect: {
-        pathname: '/500',
-        notice: 'Error when fetching monsters.'
+        pathname: '/offline'
       }});
     }
   }
