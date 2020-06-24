@@ -12,10 +12,10 @@ class Monsters extends Component {
   }
 
   async componentDidMount() {
-    const {response} = await MonstersAPI.index();
+    const {data} = await MonstersAPI.index();
 
-    if (response) {
-      this.setState({monsters: response});
+    if (data) {
+      this.setState({monsters: data});
     }
     else {
       console.log('Error when fetching all monsters');

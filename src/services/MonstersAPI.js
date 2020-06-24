@@ -7,11 +7,11 @@ const handleResponse = response => {
   if (!response.ok) {
     return response.json().then(data => {
       let errors = [];
-      Array.isArray(data.error) ? errors = data.error : errors.push(data.error);
+      Array.isArray(data.errors) ? errors = data.errors : errors.push(data.errors);
       return {errors}
     });
   }
-  return response.json().then(data => ({response: data}));;
+  return response.json().then(data => ({data}));;
 }
 
 const index = () => {

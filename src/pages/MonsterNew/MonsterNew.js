@@ -18,8 +18,8 @@ class MonsterNew extends Component {
     return MonstersAPI.create(this.state.monster);
   }
 
-  redirectTo = (response) =>
-    `/monsters/${response.id}`
+  redirectTo = monster =>
+    `/monsters/${monster.id}`
 
   render() {
     return (

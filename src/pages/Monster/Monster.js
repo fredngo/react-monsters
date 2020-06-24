@@ -14,10 +14,10 @@ class Monster extends Component {
   }
   
   async componentDidMount() {
-    const {response} = await MonstersAPI.show(this.props.id);
+    const {data} = await MonstersAPI.show(this.props.id);
 
-    if (response) {
-      this.setState({monster: response});
+    if (data) {
+      this.setState({monster: data});
     }
     else {
       this.setState({redirect: {
@@ -29,9 +29,9 @@ class Monster extends Component {
 
   handleDelete = async e => {
     e.preventDefault();
-    const {response} = await MonstersAPI.destroy(this.state.monster.id);
+    const {data} = await MonstersAPI.destroy(this.state.monster.id);
 
-    if (response)
+    if (data)
       this.setState({redirect: {
         pathname: '/',
         notice: 'Monster was successfully deleted.'

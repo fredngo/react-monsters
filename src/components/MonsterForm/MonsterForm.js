@@ -20,11 +20,11 @@ class MonsterForm extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    const {response, errors} = await this.props.callApi();
+    const {data, errors} = await this.props.callApi();
 
-    if (response) {
+    if (data) {
       this.setState({redirect: {
-        pathname: this.props.redirectTo(response),
+        pathname: this.props.redirectTo(data),
         notice: this.props.redirectNotice
       }});
     }
