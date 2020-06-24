@@ -44,7 +44,7 @@ class Monsters extends Component {
 
     return (
       <>
-        <h1 className="mt-5">Monsters for Hire, Inc.</h1>
+        <h1 className="mt-4">Monsters for Hire, Inc.</h1>
   
         <Link to={'/monsters/new'}>New Monster</Link>
         <br />

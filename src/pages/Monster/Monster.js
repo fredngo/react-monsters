@@ -62,7 +62,7 @@ class Monster extends Component {
 
     return (
       <>
-        <h1 className="mt-5">{name}</h1>
+        <h1 className="mt-4">{name}</h1>
   
         <img src={imgSrc} alt='Monster Pic' />
 
