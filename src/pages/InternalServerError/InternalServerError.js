@@ -1,7 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
-const InternalServerError = ({location}) => (
+const InternalServerError = () => (
   <>
     <h1>Internal Server Error</h1>
   </>
