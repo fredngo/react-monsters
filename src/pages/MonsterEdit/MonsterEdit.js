@@ -27,7 +27,7 @@ class MonsterEdit extends Component {
 
   async componentDidMount() {
     try {
-      const {data} = await MonstersAPI.show(this.props.id);
+      const {data} = await MonstersAPI.show(this.props.match.params.id);
 
       if (data) {
         this.setState({monster: data});

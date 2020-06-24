@@ -15,7 +15,7 @@ class Monster extends Component {
   
   async componentDidMount() {
     try {
-      const {data} = await MonstersAPI.show(this.props.id);
+      const {data} = await MonstersAPI.show(this.props.match.params.id);
 
       if (data) {
         this.setState({monster: data});
@@ -62,7 +62,7 @@ class Monster extends Component {
 
     return (
       <>
-        <p id="notice">{this.props.redirect_state?.notice ? this.props.redirect_state.notice : ''}</p>
+        <p id="notice">{this.props.location.state?.notice ? this.props.location.state.notice : ''}</p>
 
         <Link to='/'>Back</Link>
   

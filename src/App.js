@@ -17,13 +17,13 @@ const App = () => {
           <MonsterNew />
         </Route>
         <Route path="/monsters/:id/edit"
-          render={ routeProps => <MonsterEdit id={routeProps.match.params.id} />}
+          render={ routeProps => <MonsterEdit {...routeProps} />}
         />
         <Route path="/monsters/:id"
-          render={ routeProps => <Monster id={routeProps.match.params.id} redirect_state={routeProps.location.state} />}
+          render={ routeProps => <Monster {...routeProps} />} //id={routeProps.match.params.id} redirect_state={routeProps.location.state} />}
         />
         <Route exact path="/"
-          render={ routeProps => <Monsters redirect_state={routeProps.location.state} />}
+          render={ routeProps => <Monsters {...routeProps} />}
         />
         <Route path="/404" component={NotFound} />
         <Route path="/500" component={InternalServerError} />
