@@ -18,10 +18,10 @@ const App = () => {
         </nav>
       </header>
       
-      <main role="main">
+      <main>
         <Route path="/" render={ routeProps =>
           !routeProps.location.state?.notice ? '' :
-          <div className="m-3 alert alert-primary" role="alert">
+          <div className="m-3 alert alert-primary">
             {routeProps.location.state.notice}
           </div>}
         />

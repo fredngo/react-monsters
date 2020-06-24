@@ -59,7 +59,7 @@ class MonsterForm extends Component {
           }
 
           <div className="form-group">
-            <label htmlFor="name">
+            <label>
               <span>Name</span>
               <input
                 className="form-control"
@@ -94,8 +94,8 @@ class MonsterForm extends Component {
                 // required
               />
             </label>
-            </div>
-            <div>
+          </div>
+          <div>
             <label>
               <span>Bio</span>
               <textarea
@@ -105,7 +105,7 @@ class MonsterForm extends Component {
                 onChange={this.handleChange}
               />
             </label>
-            </div>
+          </div>
           <button className="btn btn-primary">{buttonText}</button>
           <Link className="btn btn-link" to={cancelPath}>Cancel</Link>
         </form>
