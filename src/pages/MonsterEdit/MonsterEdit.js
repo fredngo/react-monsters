@@ -18,8 +18,10 @@ class MonsterEdit extends Component {
   setRedirectTo = redirectTo =>
     this.setState({redirectTo});
 
-  callApi = () =>
-    MonstersAPI.update(this.state.monster);
+  submitToApi = async () => {
+    const response = await MonstersAPI.update(this.state.monster);
+    return response;
+  }
 
   async componentDidMount() {
     const monster = await MonstersAPI.show(this.props.id);
@@ -42,7 +44,7 @@ class MonsterEdit extends Component {
           monster={this.state.monster}
           setMonster={this.setMonster}
           setRedirectTo={this.setRedirectTo}
-          callApi={this.callApi}
+          submitToApi={this.submitToApi}
           buttonText='Update Monster'
         />
       </>

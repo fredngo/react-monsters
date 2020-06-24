@@ -18,8 +18,10 @@ class MonsterNew extends Component {
   setRedirectTo = redirectTo =>
     this.setState({redirectTo});
 
-  callApi = () =>
-    MonstersAPI.create(this.state.monster);
+  submitToApi = async () => {
+    const response = await MonstersAPI.create(this.state.monster);
+    return response;
+  }
 
   render() {
     if (this.state.redirectTo) return <Redirect to={{
@@ -37,7 +39,7 @@ class MonsterNew extends Component {
           monster={this.state.monster}
           setMonster={this.setMonster}
           setRedirectTo={this.setRedirectTo}
-          callApi={this.callApi}
+          submitToApi={this.submitToApi}
           buttonText='Create Monster'
         />
       </>

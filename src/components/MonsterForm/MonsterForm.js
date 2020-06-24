@@ -12,10 +12,10 @@ class MonsterForm extends Component {
       [e.target.name]: e.target.value
     });
 
-  handleSubmit = async e => {
+  handleSubmit = e => {
     e.preventDefault();
 
-    const response = await this.props.callApi();
+    const response = this.props.submitToApi();
 
     if (response.error) {
       let errors = [];
