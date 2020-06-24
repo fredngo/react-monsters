@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -8,49 +8,17 @@ import MonsterForm from '../../components/MonsterForm/MonsterForm';
 class MonsterNew extends Component {
 
   state = {
-    monster: {
-      name: null,
-      home: null,
-      creepiness: null,
-      bio: null,
-    },
-    errors: [],
-    redirect: {
-      pathname: false,
-      notice: '',
-    },
+    monster: {},
   }
 
-  handleChange = e => {
-    e.persist();
+  setMonster = m =>
     this.setState( prevState => {
-      const nextMonster = {...prevState.monster};
-      nextMonster[e.target.name] = e.target.value;
-      return {monster: nextMonster};
+      return {monster: {...prevState.monster, ...m}};
     });
-  }
 
-  handleSubmit = async e => {
-    e.preventDefault();
-    const response = await MonstersAPI.create(this.state.monster);
-
-    if (!response.error)
-      this.setState({redirect: {
-        pathname: `/monsters/${response.id}`,
-        notice: 'Monster was successfully created.'
-      }});
-    else {
-      this.setState({errors: response.error});
-    }
-  }
+  callApi = () => MonstersAPI.create(this.state.monster);
 
   render() {
-    if (this.state.redirect.pathname)
-      return <Redirect to={{
-        pathname: this.state.redirect.pathname,
-        state: { notice: this.state.redirect.notice }
-      }} />
-
     return (
       <>
         <Link to='/'>Back</Link>
@@ -59,10 +27,10 @@ class MonsterNew extends Component {
 
         <MonsterForm
           monster={this.state.monster}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          setMonster={this.setMonster}
+          callApi={this.callApi}
           buttonText='Create Monster'
-          errors={this.state.errors}
+          successNotice='Monster was successfully created.'
         />
       </>
     );
