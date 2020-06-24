@@ -37,7 +37,10 @@ class Monster extends Component {
         notice: 'Monster was successfully deleted.'
       }});
     else {
-      console.log('Error when deleting a monster');
+      this.setState({redirect: {
+        pathname: '/500',
+        notice: 'Error when deleting a monster.'
+      }});
     }
   }
 

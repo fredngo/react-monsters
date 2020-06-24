@@ -6,6 +6,7 @@ import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
+import InternalServerError from './pages/InternalServerError/InternalServerError';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           render={ routeProps => <Monsters redirect_state={routeProps.location.state} />}
         />
         <Route path="/404" component={NotFound} />
+        <Route path="/500" component={InternalServerError} />
         <Route component={NotFound} />
       </Switch>
     </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -8,7 +8,11 @@ import MonsterRow from '../../components/MonsterRow/MonsterRow';
 class Monsters extends Component {
 
   state = {
-    monsters: []
+    monsters: [],
+    redirect: {
+      pathname: false,
+      notice: null,
+    },
   }
 
   async componentDidMount() {
@@ -18,11 +22,17 @@ class Monsters extends Component {
       this.setState({monsters: data});
     }
     else {
-      console.log('Error when fetching all monsters');
+      this.setState({redirect: {
+        pathname: '/500',
+        notice: 'Error when fetching monsters.'
+      }});
     }
   }
 
   render() {
+    const {pathname, notice} = this.state.redirect;
+    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
+
     const allMonsterRows = this.state.monsters.map( m => <MonsterRow key={m.id} {...m} /> );
 
     return (
