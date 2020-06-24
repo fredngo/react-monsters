@@ -10,7 +10,7 @@ class MonsterForm extends Component {
   handleChange = e => 
     this.props.setMonster({
       ...this.props.monster, 
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.valueAsNumber || e.target.value
     });
 
   handleSubmit = async e => {
