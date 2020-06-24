@@ -19,12 +19,12 @@ const index = () => {
     .then(handleAPIErrors);
 }
 
-const show = (id) => {
+const show = id => {
   return fetch(memberUrl(id))
     .then(handleAPIErrors);
 }
 
-const create = (monster) => {
+const create = monster => {
   return fetch(collectionUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -33,7 +33,7 @@ const create = (monster) => {
     .then(handleAPIErrors);
 }
 
-const update = (monster) => {
+const update = monster => {
   return fetch(memberUrl(monster.id), {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
@@ -42,7 +42,7 @@ const update = (monster) => {
     .then(handleAPIErrors);
 }
 
-const destroy = (id) => {
+const destroy = id => {
   return fetch(memberUrl(id), {
       method: 'DELETE'
     })

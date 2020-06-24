@@ -27,9 +27,7 @@ const App = () => {
         />
 
         <Switch>
-          <Route path="/monsters/new">
-            <MonsterNew />
-          </Route>
+          <Route path="/monsters/new" component={MonsterNew} />
           <Route path="/monsters/:id/edit"
             render={ routeProps => <MonsterEdit {...routeProps} />}
           />
