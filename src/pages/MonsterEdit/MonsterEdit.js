@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -9,20 +9,29 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
+    redirectTo: false,
   }
 
   setMonster = monster =>
     this.setState({monster});
+
+  setRedirectTo = redirectTo =>
+    this.setState({redirectTo});
 
   callApi = () =>
     MonstersAPI.update(this.state.monster);
 
   async componentDidMount() {
     const monster = await MonstersAPI.show(this.props.id);
-    this.setState({monster})
+    this.setState({monster});
   }
 
   render() {
+    if (this.state.redirectTo) return <Redirect to={{
+      pathname: this.state.redirectTo,
+      state: {notice: 'Monster was successfully updated.'}
+    }} />
+
     return (
       <>
         <Link to={`/monsters/${this.state.monster.id}`}>Back</Link>
@@ -32,9 +41,9 @@ class MonsterEdit extends Component {
         <MonsterForm 
           monster={this.state.monster}
           setMonster={this.setMonster}
+          setRedirectTo={this.setRedirectTo}
           callApi={this.callApi}
           buttonText='Update Monster'
-          successNotice='Monster was successfully updated.'
         />
       </>
     );

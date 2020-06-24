@@ -1,40 +1,33 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 class MonsterForm extends Component {
 
   state = {
     errors: [],
-    redirect: {
-      pathname: false,
-      notice: '',
-    },
   }
 
   handleChange = e => 
-    this.props.setMonster({...this.props.monster, [e.target.name]: e.target.value});
+    this.props.setMonster({
+      ...this.props.monster, 
+      [e.target.name]: e.target.value
+    });
 
   handleSubmit = async e => {
     e.preventDefault();
 
     const response = await this.props.callApi();
 
-    if (!response.error)
-      this.setState({redirect: {
-        pathname: `/monsters/${response.id}`,
-        notice: this.props.successNotice
-      }});
-    else {
+    if (response.error) {
       let errors = [];
       Array.isArray(response.error) ? errors = response.error : errors.push(response.error)
       this.setState({errors});
     }
+    else {
+      this.props.setRedirectTo(`/monsters/${this.props.monster.id}`);
+    }
   }
 
   render() {
-    const {pathname, notice} = this.state.redirect;
-    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
-
     const {monster, buttonText} = this.props;
     return (
       <>
