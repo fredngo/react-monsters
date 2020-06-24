@@ -62,8 +62,6 @@ class Monster extends Component {
 
     return (
       <>
-        <p id="notice">{this.props.location.state?.notice ? this.props.location.state.notice : ''}</p>
-
         <Link to='/'>Back</Link>
   
         <h1>{name}</h1>

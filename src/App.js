@@ -12,6 +12,13 @@ import Offline from './pages/Offline/Offline';
 const App = () => {
   return (
     <div>
+      <Route path="/" render={ routeProps =>
+        !routeProps.location.state?.notice ? '' :
+        <div class="alert alert-primary" role="alert">
+          {routeProps.location.state.notice}
+        </div>}
+      />
+
       <Switch>
         <Route path="/monsters/new">
           <MonsterNew />
@@ -20,7 +27,7 @@ const App = () => {
           render={ routeProps => <MonsterEdit {...routeProps} />}
         />
         <Route path="/monsters/:id"
-          render={ routeProps => <Monster {...routeProps} />} //id={routeProps.match.params.id} redirect_state={routeProps.location.state} />}
+          render={ routeProps => <Monster {...routeProps} />}
         />
         <Route exact path="/"
           render={ routeProps => <Monsters {...routeProps} />}
