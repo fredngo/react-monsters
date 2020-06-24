@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -9,31 +9,34 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
-    redirectTo: false,
   }
 
   setMonster = monster =>
     this.setState({monster});
 
-  setRedirectTo = redirectTo =>
-    this.setState({redirectTo});
-
-  submitToApi = async () => {
-    const response = await MonstersAPI.update(this.state.monster);
-    return response;
+  callApi = () => {
+    return MonstersAPI.update(this.state.monster);
   }
 
+  redirectTo = () =>
+    `/monsters/${this.state.monster.id}`
+
   async componentDidMount() {
-    const monster = await MonstersAPI.show(this.props.id);
-    this.setState({monster});
+    const {response, error} = await MonstersAPI.show(this.props.id);
+
+    if (response) {
+      this.setState({monster: response});
+    }
+    else {
+      console.log('Monster was not found');
+      // this.setState({redirect: {
+      //   pathname: '/404',
+      //   notice: 'Monster was not found.'
+      // }});
+    }
   }
 
   render() {
-    if (this.state.redirectTo) return <Redirect to={{
-      pathname: this.state.redirectTo,
-      state: {notice: 'Monster was successfully updated.'}
-    }} />
-
     return (
       <>
         <Link to={`/monsters/${this.state.monster.id}`}>Back</Link>
@@ -43,9 +46,10 @@ class MonsterEdit extends Component {
         <MonsterForm 
           monster={this.state.monster}
           setMonster={this.setMonster}
-          setRedirectTo={this.setRedirectTo}
-          submitToApi={this.submitToApi}
+          callApi={this.callApi}
           buttonText='Update Monster'
+          redirectNotice='Monster was successfully updated.'
+          redirectTo={this.redirectTo}
         />
       </>
     );

@@ -3,38 +3,50 @@ const baseUrl = 'http://react-monsters-api.herokuapp.com/api/monsters';
 const collectionUrl = `${baseUrl}?api_key=${apiKey}`;
 const memberUrl = (id) => `${baseUrl}/${id}?api_key=${apiKey}`;
 
+const handleResponse = response => {
+  if (!response.ok) {
+    return response.json().then(data => {
+      let errors = [];
+      Array.isArray(data.error) ? errors = data.error : errors.push(data.error);
+      return {errors}
+    });
+  }
+  return response.json().then(data => ({response: data}));;
+}
+
 const index = () => {
   return fetch(collectionUrl)
-    .then(response => response.json());
+    .then(handleResponse);
 }
 
 const show = (id) => {
   return fetch(memberUrl(id))
-    .then(response => response.json());
+    .then(handleResponse);
 }
 
 const create = (monster) => {
-  const body = JSON.stringify(monster);
   return fetch(collectionUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body,
+      body: JSON.stringify(monster),
     })
-    .then(response => response.json());
+    .then(handleResponse);
 }
 
 const update = (monster) => {
-  const body = JSON.stringify(monster);
   return fetch(memberUrl(monster.id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
-      body,
+      body: JSON.stringify(monster),
     })
-    .then(response => response.json());
+    .then(handleResponse);
 }
 
 const destroy = (id) => {
-  return fetch(memberUrl(id), {method: 'DELETE'});
+  return fetch(memberUrl(id), {
+      method: 'DELETE'
+    })
+    .then(handleResponse);
 }
 
 const MonstersAPI = {

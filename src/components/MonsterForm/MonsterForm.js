@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 
 class MonsterForm extends Component {
 
   state = {
     errors: [],
+    redirectTo: false,
   }
 
   handleChange = e => 
@@ -12,22 +14,26 @@ class MonsterForm extends Component {
       [e.target.name]: e.target.value
     });
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
-    const response = this.props.submitToApi();
+    const {response, errors} = await this.props.callApi();
 
-    if (response.error) {
-      let errors = [];
-      Array.isArray(response.error) ? errors = response.error : errors.push(response.error)
-      this.setState({errors});
+    if (response) {
+      console.log(response);
+      this.setState({redirectTo: this.props.redirectTo(response)})
     }
     else {
-      this.props.setRedirectTo(`/monsters/${this.props.monster.id}`);
+      this.setState({errors});
     }
   }
 
   render() {
+    if (this.state.redirectTo) return <Redirect to={{
+      pathname: this.state.redirectTo,
+      state: {notice: this.props.redirectNotice}
+    }} />
+
     const {monster, buttonText} = this.props;
     return (
       <>

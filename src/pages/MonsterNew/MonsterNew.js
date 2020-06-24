@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -9,26 +9,19 @@ class MonsterNew extends Component {
 
   state = {
     monster: {},
-    redirectTo: false,
   }
 
   setMonster = monster =>
     this.setState({monster});
 
-  setRedirectTo = redirectTo =>
-    this.setState({redirectTo});
-
-  submitToApi = async () => {
-    const response = await MonstersAPI.create(this.state.monster);
-    return response;
+  callApi = () => {
+    return MonstersAPI.create(this.state.monster);
   }
 
-  render() {
-    if (this.state.redirectTo) return <Redirect to={{
-      pathname: this.state.redirectTo,
-      state: {notice: 'Monster was successfully created.'}
-    }} />
+  redirectTo = (response) =>
+    `/monsters/${response.id}`
 
+  render() {
     return (
       <>
         <Link to='/'>Back</Link>
@@ -38,9 +31,10 @@ class MonsterNew extends Component {
         <MonsterForm
           monster={this.state.monster}
           setMonster={this.setMonster}
-          setRedirectTo={this.setRedirectTo}
-          submitToApi={this.submitToApi}
+          callApi={this.callApi}
           buttonText='Create Monster'
+          redirectNotice='Monster was successfully created.'
+          redirectTo={this.redirectTo}
         />
       </>
     );
