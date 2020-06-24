@@ -25,19 +25,17 @@ class MonsterForm extends Component {
         notice: this.props.successNotice
       }});
     else {
-      this.setState({errors: response.error});
+      let errors = [];
+      Array.isArray(response.error) ? errors = response.error : errors.push(response.error)
+      this.setState({errors});
     }
   }
 
   render() {
-    if (this.state.redirect.pathname)
-      return <Redirect to={{
-        pathname: this.state.redirect.pathname,
-        state: { notice: this.state.redirect.notice }
-      }} />
+    const {pathname, notice} = this.state.redirect;
+    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
 
     const {monster, buttonText} = this.props;
-
     return (
       <>
         <form onSubmit={this.handleSubmit}>

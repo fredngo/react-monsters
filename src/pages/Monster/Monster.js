@@ -35,11 +35,8 @@ class Monster extends Component {
   }
 
   render() {
-    if (this.state.redirect.pathname)
-      return <Redirect to={{
-        pathname: this.state.redirect.pathname,
-        state: { notice: this.state.redirect.notice }
-      }} />
+    const {pathname, notice} = this.state.redirect;
+    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
 
     if (!this.state.monster.id) return <></>
 
