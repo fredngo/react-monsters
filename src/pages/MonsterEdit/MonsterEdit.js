@@ -39,7 +39,7 @@ class MonsterEdit extends Component {
         }});
       }
     }
-    catch() {
+    catch {
       this.setState({redirect: {
         pathname: '/offline'
       }});

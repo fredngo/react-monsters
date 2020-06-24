@@ -29,7 +29,7 @@ class Monsters extends Component {
         }});
       }
     }
-    catch() {
+    catch {
       this.setState({redirect: {
         pathname: '/offline'
       }});

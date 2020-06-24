@@ -32,7 +32,7 @@ class MonsterForm extends Component {
         this.setState({errors});
       }
     }
-    catch() {
+    catch {
       this.setState({redirect: {
         pathname: '/offline'
       }});
