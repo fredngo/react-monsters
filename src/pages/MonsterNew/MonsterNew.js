@@ -24,8 +24,6 @@ class MonsterNew extends Component {
   render() {
     return (
       <>
-        <Link to='/'>Back</Link>
-  
         <h1>New Monster</h1>
 
         <MonsterForm
@@ -58,8 +56,6 @@ export default MonsterNew;
 
 //   return (
 //     <>
-//       <Link to='/'>Back</Link>
-
 //       <h1>New Monster</h1>
 
 //       <MonsterForm

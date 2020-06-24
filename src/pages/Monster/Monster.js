@@ -62,8 +62,6 @@ class Monster extends Component {
 
     return (
       <>
-        <Link to='/'>Back</Link>
-  
         <h1>{name}</h1>
   
         <img src={imgSrc} alt='Monster Pic' />

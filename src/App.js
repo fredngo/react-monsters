@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Link} from 'react-router-dom';
 
 import Monsters from './pages/Monsters/Monsters';
 import Monster from './pages/Monster/Monster';
@@ -12,9 +12,13 @@ import Offline from './pages/Offline/Offline';
 const App = () => {
   return (
     <div>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <Link className="navbar-brand" to='/'>Home</Link>
+      </nav>
+
       <Route path="/" render={ routeProps =>
         !routeProps.location.state?.notice ? '' :
-        <div class="alert alert-primary" role="alert">
+        <div className="alert alert-primary" role="alert">
           {routeProps.location.state.notice}
         </div>}
       />
