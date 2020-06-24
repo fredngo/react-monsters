@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -9,6 +9,10 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
+    redirect: {
+      pathname: false,
+      notice: null,
+    },
   }
 
   setMonster = monster =>
@@ -22,21 +26,23 @@ class MonsterEdit extends Component {
     `/monsters/${this.state.monster.id}`
 
   async componentDidMount() {
-    const {response, error} = await MonstersAPI.show(this.props.id);
+    const {response} = await MonstersAPI.show(this.props.id);
 
     if (response) {
       this.setState({monster: response});
     }
     else {
-      console.log('Monster was not found');
-      // this.setState({redirect: {
-      //   pathname: '/404',
-      //   notice: 'Monster was not found.'
-      // }});
+      this.setState({redirect: {
+        pathname: '/404',
+        notice: 'Monster was not found.'
+      }});
     }
   }
 
   render() {
+    const {pathname, notice} = this.state.redirect;
+    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
+
     return (
       <>
         <Link to={`/monsters/${this.state.monster.id}`}>Back</Link>

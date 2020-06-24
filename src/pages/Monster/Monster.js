@@ -9,7 +9,7 @@ class Monster extends Component {
     monster: {},
     redirect: {
       pathname: false,
-      notice: '',
+      notice: null,
     },
   }
   

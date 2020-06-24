@@ -5,7 +5,10 @@ class MonsterForm extends Component {
 
   state = {
     errors: [],
-    redirectTo: false,
+    redirect: {
+      pathname: false,
+      notice: null,
+    },
   }
 
   handleChange = e => 
@@ -20,8 +23,10 @@ class MonsterForm extends Component {
     const {response, errors} = await this.props.callApi();
 
     if (response) {
-      console.log(response);
-      this.setState({redirectTo: this.props.redirectTo(response)})
+      this.setState({redirect: {
+        pathname: this.props.redirectTo(response),
+        notice: this.props.redirectNotice
+      }});
     }
     else {
       this.setState({errors});
@@ -29,10 +34,8 @@ class MonsterForm extends Component {
   }
 
   render() {
-    if (this.state.redirectTo) return <Redirect to={{
-      pathname: this.state.redirectTo,
-      state: {notice: this.props.redirectNotice}
-    }} />
+    const {pathname, notice} = this.state.redirect;
+    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
 
     const {monster, buttonText} = this.props;
     return (
