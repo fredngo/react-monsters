@@ -44,26 +44,25 @@ class Monsters extends Component {
 
     return (
       <>
-        <h1 className="mt-4">Monsters for Hire, Inc.</h1>
-  
-        <Link to={'/monsters/new'}>New Monster</Link>
-        <br />
+        <section className="jumbotron">
+          <div className="container">
+            <h1 className="display-4">Monsters for Hire, Inc.</h1>
+            <hr className="my-4" />
+            <p>
+              <Link className="btn btn-primary btn-lg" to={'/monsters/new'}>New Monster</Link>
+            </p>
+          </div>
+        </section>
 
+        
         { !this.state.monsters.length ? null :
-          <table>
-            <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Name</th>
-                <th>Home</th>
-                <th>Creepiness</th>
-              </tr>
-            </thead>
-    
-            <tbody>
-              {allMonsterRows}
-            </tbody>
-          </table>
+          <div className="album">
+            <div className="container">
+              <div className="row">
+                {allMonsterRows}
+              </div>
+            </div>
+          </div>
         }
       </>
     );
