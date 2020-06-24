@@ -2,7 +2,11 @@ import React from 'react';
 
 const NotFound = () => (
   <>
-    <h1 className="mt-4">404 Not Found</h1>
+    <section className="jumbotron">
+      <div className="container">
+        <h1 className="display-4">404 - Not Found</h1>
+      </div>
+    </section>
   </>
 );
 

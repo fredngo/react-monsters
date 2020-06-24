@@ -53,7 +53,6 @@ class Monsters extends Component {
             </p>
           </div>
         </section>
-
         
         { !this.state.monsters.length ? null :
           <div className="album">

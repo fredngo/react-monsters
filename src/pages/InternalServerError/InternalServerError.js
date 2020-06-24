@@ -2,7 +2,11 @@ import React from 'react';
 
 const InternalServerError = () => (
   <>
-    <h1 className="mt-4">Internal Server Error</h1>
+    <section className="jumbotron">
+      <div className="container">
+        <h1 className="display-4">500 - Internal Server Error</h1>
+      </div>
+    </section>
   </>
 );
 
