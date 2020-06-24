@@ -7,7 +7,7 @@ const handleAPIErrors = response => {
   if (!response.ok) {
     return response.json().then(data => {
       let errors = [];
-      Array.isArray(data.errors) ? errors = data.errors : errors.push(data.errors);
+      Array.isArray(data.error) ? errors = data.error : errors.push(data.error);
       return {errors}
     });
   }
