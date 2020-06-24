@@ -54,7 +54,7 @@ class MonsterEdit extends Component {
       <>
         <Link to={`/monsters/${this.state.monster.id}`}>Back</Link>
   
-        <h1>Editing Monster</h1>
+        <h1 className="mt-5">Editing Monster</h1>
 
         <MonsterForm 
           monster={this.state.monster}
@@ -96,7 +96,7 @@ export default MonsterEdit;
 //     <>
 //       <Link to={`/monsters/${monster.id}`}>Back</Link>
 
-//       <h1>Editing Monster</h1>
+//       <h1 className="mt-5">Editing Monster</h1>
 
 //       <MonsterForm 
 //         monster={monster}

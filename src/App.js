@@ -11,37 +11,43 @@ import Offline from './pages/Offline/Offline';
 
 const App = () => {
   return (
-    <div>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <Link className="navbar-brand" to='/'>Home</Link>
-      </nav>
+    <>
+      <header>
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+          <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
+        </nav>
+      </header>
+      
+      <main role="main">
+        <div className="container">
+          <Route path="/" render={ routeProps =>
+            !routeProps.location.state?.notice ? '' :
+            <div className="alert alert-primary" role="alert">
+              {routeProps.location.state.notice}
+            </div>}
+          />
 
-      <Route path="/" render={ routeProps =>
-        !routeProps.location.state?.notice ? '' :
-        <div className="alert alert-primary" role="alert">
-          {routeProps.location.state.notice}
-        </div>}
-      />
-
-      <Switch>
-        <Route path="/monsters/new">
-          <MonsterNew />
-        </Route>
-        <Route path="/monsters/:id/edit"
-          render={ routeProps => <MonsterEdit {...routeProps} />}
-        />
-        <Route path="/monsters/:id"
-          render={ routeProps => <Monster {...routeProps} />}
-        />
-        <Route exact path="/"
-          render={ routeProps => <Monsters {...routeProps} />}
-        />
-        <Route path="/404" component={NotFound} />
-        <Route path="/500" component={InternalServerError} />
-        <Route path="/offline" component={Offline} />
-        <Route component={NotFound} />
-      </Switch>
-    </div>
+          <Switch>
+            <Route path="/monsters/new">
+              <MonsterNew />
+            </Route>
+            <Route path="/monsters/:id/edit"
+              render={ routeProps => <MonsterEdit {...routeProps} />}
+            />
+            <Route path="/monsters/:id"
+              render={ routeProps => <Monster {...routeProps} />}
+            />
+            <Route exact path="/"
+              render={ routeProps => <Monsters {...routeProps} />}
+            />
+            <Route path="/404" component={NotFound} />
+            <Route path="/500" component={InternalServerError} />
+            <Route path="/offline" component={Offline} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </main>
+    </>
   );
 }
 

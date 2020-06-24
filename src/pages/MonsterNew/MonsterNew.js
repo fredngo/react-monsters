@@ -23,7 +23,7 @@ class MonsterNew extends Component {
   render() {
     return (
       <>
-        <h1>New Monster</h1>
+        <h1 className="mt-5">New Monster</h1>
 
         <MonsterForm
           monster={this.state.monster}
@@ -55,7 +55,7 @@ export default MonsterNew;
 
 //   return (
 //     <>
-//       <h1>New Monster</h1>
+//       <h1 className="mt-5">New Monster</h1>
 
 //       <MonsterForm
 //         monster={monster}
