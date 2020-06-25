@@ -1,6 +1,6 @@
 const baseUrl = 'http://react-monsters-api.herokuapp.com/api/monsters';
 const collectionUrl = `${baseUrl}`;
-const memberUrl = (id) => `${baseUrl}/${id}`;
+const memberUrl = id => `${baseUrl}/${id}`;
 
 const authHeaders = {
   'X-MONSTERS-API-ID': process.env.REACT_APP_MONSTERS_API_ID,
