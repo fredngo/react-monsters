@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class Redirector extends Component {
-  
+
   componentDidUpdate() {
     const {redirect, location, history, setRedirect} = this.props;
     const {path, alert} = redirect;

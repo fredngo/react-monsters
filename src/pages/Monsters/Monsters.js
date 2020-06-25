@@ -46,13 +46,19 @@ class Monsters extends Component {
             </p>
           </div>
         </section>
-        
-        { !this.state.monsters.length ? null :
+
+        { this.state.monsters.length ? 
           <div className="album">
             <div className="container">
               <div className="row">
                 {allMonsterRows}
               </div>
+            </div>
+          </div>
+          :
+          <div class="text-center">
+            <div class="spinner-border">
+              <span class="sr-only">Loading...</span>
             </div>
           </div>
         }
