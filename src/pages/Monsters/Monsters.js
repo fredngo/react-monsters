@@ -56,9 +56,9 @@ class Monsters extends Component {
             </div>
           </div>
           :
-          <div class="text-center">
-            <div class="spinner-border">
-              <span class="sr-only">Loading...</span>
+          <div className="text-center">
+            <div className="spinner-border">
+              <span className="sr-only">Loading...</span>
             </div>
           </div>
         }
