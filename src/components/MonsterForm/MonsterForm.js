@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class MonsterForm extends Component {
 
   state = {
     errors: [],
-    redirect: {
-      pathname: false,
-      notice: null,
-    },
   }
 
   handleChange = e => 
@@ -23,26 +19,23 @@ class MonsterForm extends Component {
       const {data, errors} = await this.props.callApi();
 
       if (data) {
-        this.setState({redirect: {
-          pathname: this.props.redirectTo(data),
-          notice: this.props.redirectNotice
-        }});
+        this.props.setRedirect({
+          path: this.props.redirectTo(data),
+          alert: this.props.redirectNotice
+        });
       }
       else {
         this.setState({errors});
       }
     }
     catch {
-      this.setState({redirect: {
-        pathname: '/offline'
-      }});
+      this.props.setRedirect({
+        path: '/offline'
+      });
     }
   }
 
   render() {
-    const {pathname, notice} = this.state.redirect;
-    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
-
     const {monster, buttonText, cancelPath} = this.props;
     return (
       <>

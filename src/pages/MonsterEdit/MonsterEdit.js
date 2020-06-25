@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -9,10 +8,6 @@ class MonsterEdit extends Component {
 
   state = {
     monster: {},
-    redirect: {
-      pathname: false,
-      notice: null,
-    },
   }
 
   setMonster = monster =>
@@ -33,23 +28,20 @@ class MonsterEdit extends Component {
         this.setState({monster: data});
       }
       else {
-        this.setState({redirect: {
-          pathname: '/404',
-          notice: 'Monster was not found.'
-        }});
+        this.props.setRedirect({
+          path: '/404',
+          alert: 'Monster was not found.'
+        });
       }
     }
     catch {
-      this.setState({redirect: {
-        pathname: '/offline'
-      }});
+      this.props.setRedirect({
+        path: '/offline'
+      });
     }
   }
 
   render() {
-    const {pathname, notice} = this.state.redirect;
-    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
-
     return (
       <div className="container">
         <div className="row">
@@ -63,6 +55,7 @@ class MonsterEdit extends Component {
             buttonText='Update Monster'
             redirectNotice='Monster was successfully updated.'
             redirectTo={this.redirectTo}
+            setRedirect={this.props.setRedirect}
             cancelPath={`/monsters/${this.state.monster.id}`}
           />
         </div>

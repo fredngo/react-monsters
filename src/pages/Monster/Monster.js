@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
@@ -7,10 +7,6 @@ class Monster extends Component {
 
   state = {
     monster: {},
-    redirect: {
-      pathname: false,
-      notice: null,
-    },
   }
   
   async componentDidMount() {
@@ -21,16 +17,16 @@ class Monster extends Component {
         this.setState({monster: data});
       }
       else {
-        this.setState({redirect: {
-          pathname: '/404',
-          notice: 'Monster was not found.'
-        }});
+        this.props.setRedirect({
+          path: '/404',
+          alert: 'Monster was not found.'
+        });
       }
     }
     catch {
-      this.setState({redirect: {
-        pathname: '/offline'
-      }});
+      this.props.setRedirect({
+        path: '/offline'
+      });
     }
   }
 
@@ -39,22 +35,19 @@ class Monster extends Component {
     const {data} = await MonstersAPI.destroy(this.state.monster.id);
 
     if (data)
-      this.setState({redirect: {
-        pathname: '/',
-        notice: 'Monster was successfully deleted.'
-      }});
+    this.props.setRedirect({
+        path: '/',
+        alert: 'Monster was successfully deleted.'
+      });
     else {
-      this.setState({redirect: {
-        pathname: '/500',
-        notice: 'Error when deleting a monster.'
-      }});
+      this.props.setRedirect({
+        path: '/500',
+        alert: 'Error when deleting a monster.'
+      });
     }
   }
 
   render() {
-    const {pathname, notice} = this.state.redirect;
-    if (pathname) return <Redirect to={{ pathname, state: { notice } }} />
-
     if (!this.state.monster.id) return <></>
 
     const {id, name, home, creepiness, bio} = this.state.monster;

@@ -34,6 +34,7 @@ class MonsterNew extends Component {
             buttonText='Create Monster'
             redirectNotice='Monster was successfully created.'
             redirectTo={this.redirectTo}
+            setRedirect={this.props.setRedirect}
             cancelPath='/'
           />
         </div>
