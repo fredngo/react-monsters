@@ -9,9 +9,6 @@ import App from './App';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log('REACT_APP_MONSTERS_API_ID =', process.env.REACT_APP_MONSTERS_API_ID);
-console.log('REACT_APP_MONSTERS_API_SECRET =', process.env.REACT_APP_MONSTERS_API_SECRET);
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>
