@@ -5,6 +5,10 @@ import Monsters from './pages/Monsters/Monsters';
 import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
+
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
+
 import NotFound from './pages/NotFound/NotFound';
 import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
@@ -13,9 +17,13 @@ import Redirector from './components/Redirector/Redirector';
 class App extends Component {
 
   state = {
+    user: {},
     redirect: {},
     modal: false,
   }
+
+  setUser = user =>
+    this.setState({user});
 
   setRedirect = redirect =>
     this.setState({redirect})
@@ -34,8 +42,13 @@ class App extends Component {
         />
 
         <header>
-          <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+          <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between">
             <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
+
+            <div className="navbar-nav">
+              <Link className="nav-item nav-link" to='/login'>Login</Link>
+              <Link className="nav-item nav-link" to='/signup'>Signup</Link>
+            </div>
           </nav>
         </header>
         
@@ -59,6 +72,12 @@ class App extends Component {
             />
             <Route exact path="/"
               render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
+            />
+            <Route path="/Login" 
+              render={ () => <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
+            />
+            <Route path="/Signup" 
+              render={ () => <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
             />
             <Route path="/404" component={NotFound} />
             <Route component={NotFound} />
