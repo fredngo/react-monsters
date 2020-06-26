@@ -88,7 +88,7 @@ class MonsterForm extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="form-group">
             <label>
               <span>Bio</span>
               <textarea
