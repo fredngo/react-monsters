@@ -16,9 +16,8 @@ class App extends Component {
     redirect: {},
   }
 
-  setRedirect = redirect => {
-    this.setState({redirect});
-  }
+  setRedirect = redirect =>
+    this.setState({redirect})
 
   render() {
     return (
@@ -34,7 +33,7 @@ class App extends Component {
         </header>
         
         <main>
-          <Route path="/" render={ routeProps =>
+          <Route render={ routeProps =>
             !routeProps.location.state?.alert ? '' :
             <div className="m-3 alert alert-primary">
               {routeProps.location.state.alert}
@@ -52,7 +51,7 @@ class App extends Component {
               render={ routeProps => <Monster setRedirect={this.setRedirect} {...routeProps} />}
             />
             <Route exact path="/"
-              render={ routeProps => <Monsters setRedirect={this.setRedirect} {...routeProps} />}
+              render={ () => <Monsters setRedirect={this.setRedirect} />}
             />
             <Route path="/404" component={NotFound} />
             <Route path="/500" component={InternalServerError} />
