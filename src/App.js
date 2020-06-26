@@ -35,7 +35,7 @@ class App extends Component {
         <main>
           <Route render={ routeProps =>
             !routeProps.location.state?.alert ? '' :
-            <div className="m-3 alert alert-primary">
+            <div className="position-relative float-right m-3 alert alert-primary">
               {routeProps.location.state.alert}
             </div>}
           />
