@@ -17,11 +17,11 @@ import Redirector from './components/Redirector/Redirector';
 class App extends Component {
 
   state = {
-    user: {},
     redirect: {},
     modal: false,
-    loggingIn: false,
-    signingUp: false,
+    user: {},
+    login: false,
+    signup: false,
   }
 
   setUser = user =>
@@ -33,15 +33,21 @@ class App extends Component {
   setModal = modal =>
     this.setState({modal})
 
+  toggleModal = e => {
+    e.preventDefault();
+    e.persist();
+    this.setState(prevState => ({[e.target.name]:!prevState[e.target.name]}));
+  }
+
   render() {
     return (
       <>
         { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
         { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
-        { (this.state.loggingIn) ? <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} /> : null }
-        { (this.state.signingUp) ? <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} /> : null }
+        { (this.state.login) ? <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} toggleModal={this.toggleModal} /> : null }
+        { (this.state.signup) ? <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} toggleModal={this.toggleModal} /> : null }
 
-        <Route 
+        <Route
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
         />
 
@@ -50,8 +56,8 @@ class App extends Component {
             <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
 
             <div className="navbar-nav">
-              <Link className="nav-item nav-link" to='/login'>Login</Link>
-              <Link className="nav-item nav-link" to='/signup'>Signup</Link>
+              <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleModal}>Login</button>
+              <button className="nav-item nav-link btn btn-link" name="signup" onClick={this.toggleModal}>Sign Up</button>
             </div>
           </nav>
         </header>
@@ -76,12 +82,6 @@ class App extends Component {
             />
             <Route exact path="/"
               render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
-            />
-            {/* <Route path="/Login" 
-              render={ () => <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
-            /> */}
-            <Route path="/Signup" 
-              render={ () => <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
             />
             <Route path="/404" component={NotFound} />
             <Route component={NotFound} />

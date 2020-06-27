@@ -44,8 +44,8 @@ class UserForm extends Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="modal-header">
                   <h5 className="modal-title">{this.props.headerText}</h5>
-                  <button type="button" className="close">
-                    <span>&times;</span>
+                  <button type="button" className="close" name={this.props.modalName} onClick={this.props.toggleModal}>
+                    &times;
                   </button>
                 </div>
                 <div className="modal-body">
