@@ -20,6 +20,8 @@ class App extends Component {
     user: {},
     redirect: {},
     modal: false,
+    loggingIn: false,
+    signingUp: false,
   }
 
   setUser = user =>
@@ -36,6 +38,8 @@ class App extends Component {
       <>
         { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
         { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
+        { (this.state.loggingIn) ? <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} /> : null }
+        { (this.state.signingUp) ? <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} /> : null }
 
         <Route 
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
@@ -73,9 +77,9 @@ class App extends Component {
             <Route exact path="/"
               render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
             />
-            <Route path="/Login" 
+            {/* <Route path="/Login" 
               render={ () => <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
-            />
+            /> */}
             <Route path="/Signup" 
               render={ () => <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} />}
             />

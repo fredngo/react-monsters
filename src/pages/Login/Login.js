@@ -9,21 +9,16 @@ const Login = ({user, setUser, setRedirect}) => {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <h1 className="mt-4">Login</h1>
-      </div>
-      <div className="row">
-        <UserForm
-          user={user}
-          setUser={setUser}
-          callApi={callApi}
-          redirectNotice='Login successful'
-          redirectTo='/'
-          setRedirect={setRedirect}
-        />
-      </div>
-    </div>
+    <UserForm
+      user={user}
+      setUser={setUser}
+      callApi={callApi}
+      headerText='Login to your Account'
+      buttonText='Login'
+      redirectNotice='Login successful'
+      redirectTo='/'
+      setRedirect={setRedirect}
+    />
   );
 }
 
