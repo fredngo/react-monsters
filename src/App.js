@@ -36,7 +36,12 @@ class App extends Component {
   toggleModal = e => {
     e.preventDefault();
     e.persist();
-    this.setState(prevState => ({[e.target.name]:!prevState[e.target.name]}));
+    this.setState(prevState => (
+      {
+        user: {},
+        [e.target.name]:!prevState[e.target.name],
+      }
+    ));
   }
 
   render() {

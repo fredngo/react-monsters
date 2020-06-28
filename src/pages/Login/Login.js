@@ -6,6 +6,10 @@ const Login = ({user, setUser, setRedirect, toggleModal}) => {
 
   const callApi = () => {
     console.log('Logging In via API');
+
+    return {
+      errors: ["Some Error", "Another Error"]
+    }
   }
 
   return (

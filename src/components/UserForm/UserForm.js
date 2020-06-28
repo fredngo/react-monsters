@@ -12,10 +12,10 @@ class UserForm extends Component {
       [e.target.name]: e.target.value
     });
 
-  handleSubmit = async e => {
+  handleSubmit = e => { //async
     e.preventDefault();
     try {
-      const {data, errors} = await this.props.callApi();
+      const {data, errors} = this.props.callApi(); //await
 
       if (data) {
         this.props.setRedirect({
@@ -64,9 +64,10 @@ class UserForm extends Component {
                       <span>Email Address</span>
                       <input
                         className="form-control"
-                        type="email"
+                        //type="email"
+                        type="text"
                         name="email"
-                        //defaultValue={}
+                        //defaultValue={this.props.user.email}
                         onChange={this.handleChange}
                         //required
                         autoFocus
@@ -79,9 +80,10 @@ class UserForm extends Component {
                       <span>Password</span>
                       <input
                         className="form-control"
-                        type="password"
+                        //type="password"
+                        type="text"
                         name="password"
-                        //defaultValue={}
+                        //defaultValue={this.props.user.password}
                         onChange={this.handleChange}
                         //required
                       />
@@ -89,7 +91,7 @@ class UserForm extends Component {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-primary">{this.props.buttonText}</button>
+                  <button className="btn btn-primary">{this.props.buttonText}</button>
                 </div>
               </form>
             </div>

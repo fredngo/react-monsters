@@ -6,6 +6,10 @@ const Signup = ({user, setUser, setRedirect, toggleModal}) => {
 
   const callApi = () => {
     console.log('Signing Up via API');
+
+    return {
+      errors: ["Some Error", "Another Error"]
+    }
   }
 
   return (
