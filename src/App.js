@@ -22,8 +22,10 @@ class App extends Component {
     currentUser: {},
   }
 
-  setCurrentUser = currentUser =>
+  setCurrentUser = currentUser => {
     this.setState({currentUser});
+    localStorage.setItem('sessionToken', currentUser.sessionToken);
+  }
 
   setRedirect = redirect =>
     this.setState({redirect});
@@ -35,6 +37,11 @@ class App extends Component {
     e.preventDefault();
     e.persist();
     this.setModal(this.state.modal === e.target.name ? false : e.target.name)
+  }
+  
+  logout = () => {
+    this.setCurrentUser({})
+    localStorage.removeItem('sessionToken');
   }
 
   render() {
@@ -56,7 +63,7 @@ class App extends Component {
             <div className="navbar-nav">
               {
                 this.state.currentUser.sessionToken ?
-                <button className="nav-item nav-link btn btn-link" name="login" onClick={() => this.setCurrentUser({})}>Logout</button>
+                <button className="nav-item nav-link btn btn-link" name="login" onClick={this.logout}>Logout</button>
                 :
                 <>
                   <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleAuthModal}>Login</button>
