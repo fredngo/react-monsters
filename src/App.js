@@ -42,8 +42,8 @@ class App extends Component {
       <>
         { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
         { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
-        { (this.state.modal === "login") ? <Login setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
-        { (this.state.modal === "signup") ? <Signup setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
+        { this.state.modal === "login" ? <Login setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
+        { this.state.modal === "signup" ? <Signup setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
 
         <Route
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
@@ -54,8 +54,15 @@ class App extends Component {
             <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
 
             <div className="navbar-nav">
-              <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleAuthModal}>Login</button>
-              <button className="nav-item nav-link btn btn-link" name="signup" onClick={this.toggleAuthModal}>Sign Up</button>
+              {
+                this.state.currentUser.sessionToken ?
+                <button className="nav-item nav-link btn btn-link" name="login" onClick={() => this.setCurrentUser({})}>Logout</button>
+                :
+                <>
+                  <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleAuthModal}>Login</button>
+                  <button className="nav-item nav-link btn btn-link" name="signup" onClick={this.toggleAuthModal}>Sign Up</button>
+                </>
+              }
             </div>
           </nav>
         </header>
