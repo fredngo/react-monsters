@@ -19,29 +19,22 @@ class App extends Component {
   state = {
     redirect: {},
     modal: false,
-    user: {},
-    login: false,
-    signup: false,
+    currentUser: {},
   }
 
-  setUser = user =>
-    this.setState({user});
+  setCurrentUser = currentUser =>
+    this.setState({currentUser});
 
   setRedirect = redirect =>
-    this.setState({redirect})
+    this.setState({redirect});
 
   setModal = modal =>
     this.setState({modal})
 
-  toggleModal = e => {
+  toggleAuthModal = e => {
     e.preventDefault();
     e.persist();
-    this.setState(prevState => (
-      {
-        user: {},
-        [e.target.name]:!prevState[e.target.name],
-      }
-    ));
+    this.setModal(this.state.modal === e.target.name ? false : e.target.name)
   }
 
   render() {
@@ -49,8 +42,8 @@ class App extends Component {
       <>
         { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
         { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
-        { (this.state.login) ? <Login user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} toggleModal={this.toggleModal} /> : null }
-        { (this.state.signup) ? <Signup user={this.state.user} setUser={this.setUser} setRedirect={this.setRedirect} toggleModal={this.toggleModal} /> : null }
+        { (this.state.modal === "login") ? <Login setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
+        { (this.state.modal === "signup") ? <Signup setCurrentUser={this.setCurrentUser} setRedirect={this.setRedirect} toggleModal={this.toggleAuthModal} /> : null }
 
         <Route
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
@@ -61,8 +54,8 @@ class App extends Component {
             <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
 
             <div className="navbar-nav">
-              <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleModal}>Login</button>
-              <button className="nav-item nav-link btn btn-link" name="signup" onClick={this.toggleModal}>Sign Up</button>
+              <button className="nav-item nav-link btn btn-link" name="login" onClick={this.toggleAuthModal}>Login</button>
+              <button className="nav-item nav-link btn btn-link" name="signup" onClick={this.toggleAuthModal}>Sign Up</button>
             </div>
           </nav>
         </header>

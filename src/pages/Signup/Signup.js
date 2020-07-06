@@ -1,21 +1,14 @@
 import React from 'react';
-
 import UserForm from '../../components/UserForm/UserForm';
+import ParseService from "../../services/ParseService";
 
-const Signup = ({user, setUser, setRedirect, toggleModal}) => {
+const Signup = ({setCurrentUser, setRedirect, toggleModal}) => {
 
-  const callApi = () => {
-    console.log('Signing Up via API');
-
-    return {
-      errors: ["Some Error", "Another Error"]
-    }
-  }
+  const callApi = user => ParseService.signup(user);
 
   return (
     <UserForm
-      user={user}
-      setUser={setUser}
+      setCurrentUser={setCurrentUser}
       callApi={callApi}
       toggleModal={toggleModal}
       modalName='signup'

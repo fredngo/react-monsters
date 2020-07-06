@@ -1,25 +1,40 @@
-import React, {Component} from 'react';
+import React, {Component, createRef} from 'react';
 
 class UserForm extends Component {
 
   state = {
+    user: {},
     errors: [],
   }
 
-  handleChange = e =>
-    this.props.setUser({
-      ...this.props.user,
-      [e.target.name]: e.target.value
-    });
+  closeButton = createRef();
 
-  handleSubmit = e => { //async
+  handleChange = e => {
+    e.persist();
+    this.setState( prevState => ({
+      user: {
+        ...prevState.user,
+        [e.target.name]: e.target.value
+      }
+    }));
+  }
+
+  handleSubmit = async e => {
     e.preventDefault();
     try {
-      const {data, errors} = this.props.callApi(); //await
+      const {data, errors} = await this.props.callApi(this.state.user);
+
+      console.log("Data:", data)
+      console.log("Error:", errors)
 
       if (data) {
+        this.closeButton.current.click();
+
+        this.props.setCurrentUser(data);
+
+        console.log("Redirecting! redirectTo:", this.props.redirectTo, this.props.redirectNotice);
         this.props.setRedirect({
-          path: this.props.redirectTo(data),
+          path: this.props.redirectTo,
           alert: this.props.redirectNotice
         });
       }
@@ -44,7 +59,7 @@ class UserForm extends Component {
               <form onSubmit={this.handleSubmit}>
                 <div className="modal-header">
                   <h5 className="modal-title">{this.props.headerText}</h5>
-                  <button type="button" className="close" name={this.props.modalName} onClick={this.props.toggleModal}>
+                  <button ref={this.closeButton} type="button" className="close" name={this.props.modalName} onClick={this.props.toggleModal}>
                     &times;
                   </button>
                 </div>
@@ -61,13 +76,12 @@ class UserForm extends Component {
                   }
                   <div className="form-group">
                     <label>
-                      <span>Email Address</span>
+                      <span>Username</span>
                       <input
                         className="form-control"
-                        //type="email"
                         type="text"
-                        name="email"
-                        //defaultValue={this.props.user.email}
+                        name="username"
+                        //defaultValue={this.props.user.username}
                         onChange={this.handleChange}
                         //required
                         autoFocus
