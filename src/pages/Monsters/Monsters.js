@@ -19,10 +19,7 @@ class Monsters extends Component {
         this.setState({monsters: data});
       }
       else {
-        this.props.setRedirect({
-          path: '/500',
-          alert: 'Error when fetching monsters.'
-        });
+        this.props.setModal('internal_server_error');
       }
     }
     catch {

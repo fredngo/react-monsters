@@ -6,7 +6,7 @@ import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
-import InternalServerError from './pages/InternalServerError/InternalServerError';
+import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
 
@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <>
         { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
+        { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
 
         <Route 
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
@@ -60,7 +61,6 @@ class App extends Component {
               render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
             />
             <Route path="/404" component={NotFound} />
-            <Route path="/500" component={InternalServerError} />
             <Route component={NotFound} />
           </Switch>
         </main>

@@ -38,10 +38,7 @@ class Monster extends Component {
         alert: 'Monster was successfully deleted.'
       });
     else {
-      this.props.setRedirect({
-        path: '/500',
-        alert: 'Error when deleting a monster.'
-      });
+      this.props.setModal('internal_server_error');
     }
   }
 
