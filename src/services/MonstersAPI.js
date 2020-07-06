@@ -5,6 +5,8 @@ const memberUrl = id => `${baseUrl}/${id}`;
 const authHeaders = {
   'X-Parse-Application-Id': process.env.REACT_APP_PARSE_APPLICATION_ID,
   'X-Parse-Javascript-Key': process.env.REACT_APP_PARSE_JAVASCRIPT_KEY,
+  //'X-Parse-REST-API-Key': process.env.REACT_APP_PARSE_REST_API_KEY
+  //'X-Parse-Session-Token': '',
 };
 
 const reformatResponseData = response => {
@@ -37,8 +39,14 @@ const handleAPIErrors = response => {
 }
 
 const index = () => {
+
+  //console.log(localStorage.getItem('sessionToken'))
+
   return fetch(collectionUrl, {
-      headers: authHeaders,
+      headers: {
+      //   'X-Parse-Session-Token': localStorage.getItem('sessionToken'),
+        ...authHeaders
+      },
     })
     .then(handleAPIErrors)
     .then(reformatResponseData);
