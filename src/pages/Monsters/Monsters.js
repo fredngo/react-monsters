@@ -26,9 +26,7 @@ class Monsters extends Component {
       }
     }
     catch {
-      this.props.setRedirect({
-        path: '/offline'
-      });
+      this.props.setModal('offline');
     }
   }
 

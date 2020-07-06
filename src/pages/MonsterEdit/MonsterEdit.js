@@ -35,9 +35,7 @@ class MonsterEdit extends Component {
       }
     }
     catch {
-      this.props.setRedirect({
-        path: '/offline'
-      });
+      this.props.setModal('offline');
     }
   }
 
@@ -56,6 +54,7 @@ class MonsterEdit extends Component {
             redirectNotice='Monster was successfully updated.'
             redirectTo={this.redirectTo}
             setRedirect={this.props.setRedirect}
+            setModal={this.props.setModal}
             cancelPath={`/monsters/${this.state.monster.id}`}
           />
         </div>

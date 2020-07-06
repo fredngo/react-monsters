@@ -7,21 +7,27 @@ import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
 import InternalServerError from './pages/InternalServerError/InternalServerError';
-import Offline from './pages/Offline/Offline';
+import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
 
 class App extends Component {
 
   state = {
     redirect: {},
+    modal: false,
   }
 
   setRedirect = redirect =>
     this.setState({redirect})
 
+  setModal = modal =>
+    this.setState({modal})
+
   render() {
     return (
       <>
+        { this.state.modal === 'offline' ? <Offline /> : null }
+
         <Route 
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
         />
@@ -42,20 +48,19 @@ class App extends Component {
   
           <Switch>
             <Route path="/monsters/new"
-              render={ () => <MonsterNew setRedirect={this.setRedirect} />}
+              render={ () => <MonsterNew setRedirect={this.setRedirect} setModal={this.setModal} />}
             />
             <Route path="/monsters/:id/edit"
-              render={ routeProps => <MonsterEdit setRedirect={this.setRedirect} {...routeProps} />}
+              render={ routeProps => <MonsterEdit setRedirect={this.setRedirect} setModal={this.setModal} {...routeProps} />}
             />
             <Route path="/monsters/:id"
-              render={ routeProps => <Monster setRedirect={this.setRedirect} {...routeProps} />}
+              render={ routeProps => <Monster setRedirect={this.setRedirect} setModal={this.setModal} {...routeProps} />}
             />
             <Route exact path="/"
-              render={ () => <Monsters setRedirect={this.setRedirect} />}
+              render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
             />
             <Route path="/404" component={NotFound} />
             <Route path="/500" component={InternalServerError} />
-            <Route path="/offline" component={Offline} />
             <Route component={NotFound} />
           </Switch>
         </main>
