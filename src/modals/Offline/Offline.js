@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Offline = () => (
+const Offline = ({closeModal}) => (
   <>
     <div className="modal-backdrop fade show"></div>
     <div className="modal" style={{display:"block"}}>
@@ -8,7 +8,7 @@ const Offline = () => (
         <div className="modal-content">
           <div className="modal-header">
             <div className="modal-title">Oops!</div>
-            <button type="button" className="close">
+            <button type="button" className="close" onClick={closeModal}>
               &times;
             </button>
           </div>

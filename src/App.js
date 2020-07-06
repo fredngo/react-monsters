@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <>
-        { this.state.modal === 'offline' ? <Offline /> : null }
+        { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
 
         <Route 
           render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
