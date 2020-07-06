@@ -1,9 +1,6 @@
-//import Parse from "parse";
-
-
-const baseUrl = 'https://parseapi.back4app.com/users';
-const collectionUrl = `${baseUrl}`;
-const memberUrl = id => `${baseUrl}/${id}`;
+const baseUrl = 'https://parseapi.back4app.com';
+const signupUrl = `${baseUrl}/users`;
+const loginUrl = (u, p) => `${baseUrl}/login?username=${u}&password=${p}`;
 
 const authHeaders = {
   'X-Parse-Application-Id': process.env.REACT_APP_PARSE_APPLICATION_ID,
@@ -11,6 +8,7 @@ const authHeaders = {
 };
 
 const handleAPIErrors = response => {
+  console.log(response);
   if (!response.ok) {
     return response.json().then(data => {
       let errors = [];
@@ -40,18 +38,16 @@ const reformatResponseData = response => {
 }
 
 const login = user => {
-  console.log("Logging in");
-  return fetch(collectionUrl, {
+  console.log("Logging in, user:", user);
+  return fetch(loginUrl(user.username, user.password), {
     headers: authHeaders,
-    body: JSON.stringify(user),
   })
   .then(handleAPIErrors)
   .then(reformatResponseData);
 }
 
 const signup = user => {
-  console.log("Signing up");
-  return fetch(collectionUrl, {
+  return fetch(signupUrl, {
     method: 'POST',
     headers: {'Content-Type': 'application/json', ...authHeaders},
     body: JSON.stringify(user),
@@ -60,30 +56,9 @@ const signup = user => {
   .then(reformatResponseData);
 }
 
-const logout = () => {
-}
-
 const ParseService = {
   login,
   signup,
-  logout,
 }
 
 export default ParseService;
-
-
-// const callApi = () => {
-//   console.log('Logging In via API');
-
-//   try{
-//     await Parse.User.logIn(this.state.username, this.state.password);
-//     alert("Logged in!");
-//   } catch (e){
-//     alert(e.message); 
-//   }
-  
-//   return {
-//     errors: ["Some Error", "Another Error"]
-//   }
-//   return 
-// }

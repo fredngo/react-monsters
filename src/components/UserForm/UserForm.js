@@ -81,7 +81,6 @@ class UserForm extends Component {
                         className="form-control"
                         type="text"
                         name="username"
-                        //defaultValue={this.props.user.username}
                         onChange={this.handleChange}
                         //required
                         autoFocus
@@ -94,10 +93,8 @@ class UserForm extends Component {
                       <span>Password</span>
                       <input
                         className="form-control"
-                        //type="password"
-                        type="text"
+                        type="password"
                         name="password"
-                        //defaultValue={this.props.user.password}
                         onChange={this.handleChange}
                         //required
                       />
