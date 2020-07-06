@@ -1,4 +1,4 @@
-const baseUrl = 'https://react-monsters-api.herokuapp.com/api/monsters';
+const baseUrl = 'https://monsters-robots-api.herokuapp.com/api/monsters';
 const collectionUrl = `${baseUrl}`;
 const memberUrl = id => `${baseUrl}/${id}`;
 
