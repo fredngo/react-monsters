@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Offline = ({closeModal}) => (
   <>
     <div className="modal-backdrop fade show"></div>

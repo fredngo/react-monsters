@@ -1,5 +1,3 @@
-import React from 'react';
-
 const NotFound = () => (
   <>
     <section className="jumbotron">
