@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {useState} from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
 
 import Monsters from './pages/Monsters/Monsters';
@@ -11,60 +11,50 @@ import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
 import Alert from './components/Alert/Alert';
 
-class App extends Component {
+const App = () => {
 
-  state = {
-    redirect: {},
-    modal: false,
-  }
+  const [redirect, setRedirect] = useState({});
+  const [modal, setModal] = useState(false);
 
-  setRedirect = redirect =>
-    this.setState({redirect})
+  return (
+    <>
+      { modal === 'offline' ? <Offline closeModal={() => setModal(false)} /> : null }
+      { modal === 'internal_server_error' ? <InternalServerError closeModal={() => setModal(false)} /> : null }
 
-  setModal = modal =>
-    this.setState({modal})
+      <Route 
+        render={ routeProps => <Redirector redirect={redirect} setRedirect={setRedirect} {...routeProps} />}
+      />
 
-  render() {
-    return (
-      <>
-        { this.state.modal === 'offline' ? <Offline closeModal={() => this.setModal(false)} /> : null }
-        { this.state.modal === 'internal_server_error' ? <InternalServerError closeModal={() => this.setModal(false)} /> : null }
-
-        <Route 
-          render={ routeProps => <Redirector redirect={this.state.redirect} setRedirect={this.setRedirect} {...routeProps} />}
+      <header>
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+          <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
+        </nav>
+      </header>
+      
+      <main>
+        <Route render={ routeProps =>
+          !routeProps.location.state?.alert ? '' : <Alert message={routeProps.location.state.alert} />}
         />
 
-        <header>
-          <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-            <Link className="navbar-brand" to='/'>MfH, Inc.</Link>
-          </nav>
-        </header>
-        
-        <main>
-          <Route render={ routeProps =>
-            !routeProps.location.state?.alert ? '' : <Alert message={routeProps.location.state.alert} />}
-          />
-  
-          <Switch>
-            <Route path="/monsters/new"
-              render={ () => <MonsterNew setRedirect={this.setRedirect} setModal={this.setModal} />}
-            />
-            <Route path="/monsters/:id/edit"
-              render={ routeProps => <MonsterEdit setRedirect={this.setRedirect} setModal={this.setModal} {...routeProps} />}
-            />
-            <Route path="/monsters/:id"
-              render={ routeProps => <Monster setRedirect={this.setRedirect} setModal={this.setModal} {...routeProps} />}
-            />
-            <Route exact path="/"
-              render={ () => <Monsters setRedirect={this.setRedirect} setModal={this.setModal} />}
-            />
-            <Route path="/404" component={NotFound} />
-            <Route component={NotFound} />
-          </Switch>
-        </main>
-      </>
-    );
-  }
+        <Switch>
+          <Route path="/monsters/new" render={ () =>
+            <MonsterNew setRedirect={setRedirect} setModal={setModal} />
+          } />
+          <Route path="/monsters/:id/edit" render={ routeProps =>
+            <MonsterEdit setRedirect={setRedirect} setModal={setModal} {...routeProps} />
+          } />
+          <Route path="/monsters/:id" render={ routeProps =>
+            <Monster setRedirect={setRedirect} setModal={setModal} {...routeProps} />
+          } />
+          <Route exact path="/" render={ () =>
+            <Monsters setRedirect={setRedirect} setModal={setModal} />
+          } />
+          <Route path="/404" component={NotFound} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+    </>
+  );
 }
 
 export default App;
