@@ -6,16 +6,21 @@ import MonsterRow from '../../components/MonsterRow/MonsterRow';
 
 const Monsters = ({setModal}) => {
 
+  const [fetching, setFetching] = useState(false);
   const [monsters, setMonsters] = useState([]);
 
   useEffect( () => {
     const fetchData = async () => {
       try {
+        setFetching(true);
         const {data} = await MonstersAPI.index();
         data ? setMonsters(data) : setModal('internal_server_error');
       }
       catch {
         setModal('offline');
+      }
+      finally {
+        setFetching(false);
       }
     }
     fetchData();
@@ -35,7 +40,16 @@ const Monsters = ({setModal}) => {
         </div>
       </section>
 
-      { monsters.length ? 
+      { fetching ? <div className="text-center">
+          <div className="spinner-border">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+        :
+        <></>
+      }
+
+      { !fetching && monsters.length ? 
         <div className="album">
           <div className="container">
             <div className="row">
@@ -44,11 +58,7 @@ const Monsters = ({setModal}) => {
           </div>
         </div>
         :
-        <div className="text-center">
-          <div className="spinner-border">
-            <span className="sr-only">Loading...</span>
-          </div>
-        </div>
+        <></>
       }
     </>
   );
