@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound/NotFound';
 import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
+import Alert from './components/Alert/Alert';
 
 class App extends Component {
 
@@ -41,10 +42,7 @@ class App extends Component {
         
         <main>
           <Route render={ routeProps =>
-            !routeProps.location.state?.alert ? '' :
-            <div className="position-relative float-right m-3 alert alert-primary">
-              {routeProps.location.state.alert}
-            </div>}
+            !routeProps.location.state?.alert ? '' : <Alert message={routeProps.location.state.alert} />}
           />
   
           <Switch>
