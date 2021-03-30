@@ -17,15 +17,13 @@ const MonsterEdit = ({match, setRedirect, setModal}) => {
       try {
         const {data} = await MonstersAPI.show(match.params.id);
 
-        if (data) {
+        if (data)
           setMonster(data);
-        }
-        else {
+        else
           setRedirect({
             path: '/404',
             alert: 'Monster was not found.'
           });
-        }
       }
       catch {
         setModal('offline');
