@@ -1,47 +1,37 @@
-import {Component} from 'react';
+import {useState} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 
-class MonsterNew extends Component {
+const MonsterNew = ({setRedirect, setModal}) =>  {
 
-  state = {
-    monster: {},
-  }
+  const [monster, setMonster] = useState({});
 
-  setMonster = monster =>
-    this.setState({monster});
+  const callApi = () => MonstersAPI.create(monster);
 
-  callApi = () => {
-    return MonstersAPI.create(this.state.monster);
-  }
+  const redirectTo = monster => `/monsters/${monster.id}`;
 
-  redirectTo = monster =>
-    `/monsters/${monster.id}`
-
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <h1 className="mt-4">New Monster</h1>
-        </div>
-        <div className="row">
-          <MonsterForm
-            monster={this.state.monster}
-            setMonster={this.setMonster}
-            callApi={this.callApi}
-            buttonText='Create Monster'
-            redirectNotice='Monster was successfully created.'
-            redirectTo={this.redirectTo}
-            setRedirect={this.props.setRedirect}
-            setModal={this.props.setModal}
-            cancelPath='/'
-          />
-        </div>
+  return (
+    <div className="container">
+      <div className="row">
+        <h1 className="mt-4">New Monster</h1>
       </div>
-    );
-  }
+      <div className="row">
+        <MonsterForm
+          monster={monster}
+          setMonster={setMonster}
+          callApi={callApi}
+          buttonText='Create Monster'
+          redirectNotice='Monster was successfully created.'
+          redirectTo={redirectTo}
+          setRedirect={setRedirect}
+          setModal={setModal}
+          cancelPath='/'
+        />
+      </div>
+    </div>
+  );
 }
 
 export default MonsterNew;
