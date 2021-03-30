@@ -1,7 +1,11 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
-const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, setRedirect, setModal, cancelPath}) => {
+import RedirectContext from '../../components/RedirectContext/RedirectContext';
+
+const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, setModal, cancelPath}) => {
+
+  const setRedirect = useContext(RedirectContext);
 
   const [errors, setErrors] = useState([]);
 

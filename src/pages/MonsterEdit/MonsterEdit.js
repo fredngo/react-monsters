@@ -48,7 +48,6 @@ const MonsterEdit = ({match, setModal}) => {
           buttonText='Update Monster'
           redirectNotice='Monster was successfully updated.'
           redirectTo={redirectTo}
-          setRedirect={setRedirect}
           setModal={setModal}
           cancelPath={`/monsters/${monster.id}`}
         />

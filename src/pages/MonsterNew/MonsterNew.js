@@ -28,7 +28,6 @@ const MonsterNew = ({setModal}) =>  {
           buttonText='Create Monster'
           redirectNotice='Monster was successfully created.'
           redirectTo={redirectTo}
-          setRedirect={setRedirect}
           setModal={setModal}
           cancelPath='/'
         />
