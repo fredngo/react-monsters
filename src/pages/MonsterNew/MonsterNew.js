@@ -2,12 +2,9 @@ import {useState, useContext} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
-import RedirectContext from '../../components/RedirectContext/RedirectContext';
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 
 const MonsterNew = ({setModal}) =>  {
-
-  const setRedirect = useContext(RedirectContext);
 
   const [monster, setMonster] = useState({});
 
