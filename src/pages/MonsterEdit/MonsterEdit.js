@@ -1,66 +1,59 @@
-import {Component} from 'react';
+import {useState, useEffect} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 
-class MonsterEdit extends Component {
+const MonsterEdit = ({match, setRedirect, setModal}) => {
 
-  state = {
-    monster: {},
-  }
+  const [monster, setMonster] = useState({});
 
-  setMonster = monster =>
-    this.setState({monster});
+  const callApi = () => MonstersAPI.update(monster);
 
-  callApi = () => {
-    return MonstersAPI.update(this.state.monster);
-  }
+  const redirectTo = () => `/monsters/${monster.id}`;
 
-  redirectTo = () =>
-    `/monsters/${this.state.monster.id}`
+  useEffect( () => {
+    const fetchData = async () =>{
+      try {
+        const {data} = await MonstersAPI.show(match.params.id);
 
-  async componentDidMount() {
-    try {
-      const {data} = await MonstersAPI.show(this.props.match.params.id);
-
-      if (data) {
-        this.setState({monster: data});
+        if (data) {
+          setMonster(data);
+        }
+        else {
+          setRedirect({
+            path: '/404',
+            alert: 'Monster was not found.'
+          });
+        }
       }
-      else {
-        this.props.setRedirect({
-          path: '/404',
-          alert: 'Monster was not found.'
-        });
+      catch {
+        setModal('offline');
       }
     }
-    catch {
-      this.props.setModal('offline');
-    }
-  }
+    fetchData();
+  }, [match.params.id, setRedirect, setModal]);
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <h1 className="mt-4">Editing Monster</h1>
-        </div>
-        <div className="row">
-          <MonsterForm 
-            monster={this.state.monster}
-            setMonster={this.setMonster}
-            callApi={this.callApi}
-            buttonText='Update Monster'
-            redirectNotice='Monster was successfully updated.'
-            redirectTo={this.redirectTo}
-            setRedirect={this.props.setRedirect}
-            setModal={this.props.setModal}
-            cancelPath={`/monsters/${this.state.monster.id}`}
-          />
-        </div>
+  return (
+    <div className="container">
+      <div className="row">
+        <h1 className="mt-4">Editing Monster</h1>
       </div>
-    );
-  }
+      <div className="row">
+        <MonsterForm 
+          monster={monster}
+          setMonster={setMonster}
+          callApi={callApi}
+          buttonText='Update Monster'
+          redirectNotice='Monster was successfully updated.'
+          redirectTo={redirectTo}
+          setRedirect={setRedirect}
+          setModal={setModal}
+          cancelPath={`/monsters/${monster.id}`}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default MonsterEdit;
