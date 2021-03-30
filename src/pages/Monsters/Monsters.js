@@ -26,7 +26,7 @@ const Monsters = ({setModal}) => {
     fetchData();
   }, [setModal]);
 
-  const allMonsterRows = monsters.length ? monsters.map( m => <MonsterRow key={m.id} {...m} /> ) : <></>;
+  const allMonsterRows = monsters.length ? monsters.map( m => <MonsterRow key={m.id} {...m} /> ) : null;
 
   return (
     <>
@@ -46,7 +46,7 @@ const Monsters = ({setModal}) => {
           </div>
         </div>
         :
-        <></>
+        null
       }
 
       { !fetching && monsters.length ? 
@@ -58,7 +58,7 @@ const Monsters = ({setModal}) => {
           </div>
         </div>
         :
-        <></>
+        null
       }
     </>
   );

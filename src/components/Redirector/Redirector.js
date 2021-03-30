@@ -23,7 +23,7 @@ class Redirector extends Component {
   }
 
   render() {
-    return <></>;
+    return null;
   }
 }
 

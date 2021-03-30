@@ -43,7 +43,7 @@ class Monster extends Component {
   }
 
   render() {
-    if (!this.state.monster.id) return <></>
+    if (!this.state.monster.id) return null;
 
     const {id, name, home, creepiness, bio} = this.state.monster;
     const imgSrc = `https://robohash.org/${id}?set=set2&size=300x300`;
