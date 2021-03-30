@@ -6,12 +6,12 @@ import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
+import {ModalContext} from './modals/Modal/Modal';
 import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
 import Alert from './components/Alert/Alert';
 import RedirectContext from './components/RedirectContext/RedirectContext';
-import ModalContext from './components/ModalContext/ModalContext';
 
 const App = () => {
 

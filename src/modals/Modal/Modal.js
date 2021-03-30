@@ -1,4 +1,8 @@
-const BaseModal = ({closeModal, title, render}) => (
+import {createContext} from 'react';
+
+export const ModalContext = createContext();
+
+const Modal = ({closeModal, title, render}) => (
   <>
     <div className="modal-backdrop fade show"></div>
     <div className="modal" style={{display:"block"}}>
@@ -19,4 +23,4 @@ const BaseModal = ({closeModal, title, render}) => (
   </>
 );
 
-export default BaseModal;
+export default Modal;

@@ -2,7 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
-import ModalContext from '../../components/ModalContext/ModalContext';
+import {ModalContext} from '../../modals/Modal/Modal';
 import RedirectContext from '../../components/RedirectContext/RedirectContext';
 
 const Monster = ({match}) => {

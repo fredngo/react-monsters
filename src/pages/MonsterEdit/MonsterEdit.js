@@ -3,7 +3,7 @@ import {useState, useEffect, useContext} from 'react';
 import MonstersAPI from '../../services/MonstersAPI';
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 import RedirectContext from '../../components/RedirectContext/RedirectContext';
-import ModalContext from '../../components/ModalContext/ModalContext';
+import {ModalContext} from '../../modals/Modal/Modal';
 
 const MonsterEdit = ({match}) => {
 

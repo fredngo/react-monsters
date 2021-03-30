@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import MonsterRow from '../../components/MonsterRow/MonsterRow';
-import ModalContext from '../../components/ModalContext/ModalContext';
+import {ModalContext} from '../../modals/Modal/Modal';
 
 const Monsters = () => {
 

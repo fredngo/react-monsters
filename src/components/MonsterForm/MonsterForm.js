@@ -2,7 +2,7 @@ import {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import RedirectContext from '../../components/RedirectContext/RedirectContext';
-import ModalContext from '../../components/ModalContext/ModalContext';
+import {ModalContext} from '../../modals/Modal/Modal';
 
 const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, cancelPath}) => {
 
