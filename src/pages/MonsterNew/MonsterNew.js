@@ -1,10 +1,9 @@
 import {useState} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
-
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 
-const MonsterNew = ({setModal}) =>  {
+const MonsterNew = () =>  {
 
   const [monster, setMonster] = useState({});
 
@@ -25,7 +24,6 @@ const MonsterNew = ({setModal}) =>  {
           buttonText='Create Monster'
           redirectNotice='Monster was successfully created.'
           redirectTo={redirectTo}
-          setModal={setModal}
           cancelPath='/'
         />
       </div>

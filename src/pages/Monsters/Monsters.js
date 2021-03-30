@@ -1,10 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import MonsterRow from '../../components/MonsterRow/MonsterRow';
+import ModalContext from '../../components/ModalContext/ModalContext';
 
-const Monsters = ({setModal}) => {
+const Monsters = () => {
+
+  const setModal = useContext(ModalContext);
 
   const [fetching, setFetching] = useState(false);
   const [monsters, setMonsters] = useState([]);

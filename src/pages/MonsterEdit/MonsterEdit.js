@@ -1,12 +1,13 @@
 import {useState, useEffect, useContext} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
-
-import RedirectContext from '../../components/RedirectContext/RedirectContext';
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
+import RedirectContext from '../../components/RedirectContext/RedirectContext';
+import ModalContext from '../../components/ModalContext/ModalContext';
 
-const MonsterEdit = ({match, setModal}) => {
+const MonsterEdit = ({match}) => {
 
+  const setModal = useContext(ModalContext);
   const setRedirect = useContext(RedirectContext);
 
   const [monster, setMonster] = useState({});
@@ -48,7 +49,6 @@ const MonsterEdit = ({match, setModal}) => {
           buttonText='Update Monster'
           redirectNotice='Monster was successfully updated.'
           redirectTo={redirectTo}
-          setModal={setModal}
           cancelPath={`/monsters/${monster.id}`}
         />
       </div>

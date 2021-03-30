@@ -2,9 +2,11 @@ import {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import RedirectContext from '../../components/RedirectContext/RedirectContext';
+import ModalContext from '../../components/ModalContext/ModalContext';
 
-const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, setModal, cancelPath}) => {
+const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, cancelPath}) => {
 
+  const setModal = useContext(ModalContext);
   const setRedirect = useContext(RedirectContext);
 
   const [errors, setErrors] = useState([]);
