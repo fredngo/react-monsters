@@ -35,22 +35,19 @@ const App = () => {
         
         <main>
           <Route render={ routeProps =>
-            !routeProps.location.state?.alert ? '' : <Alert message={routeProps.location.state.alert} />}
+            !routeProps.location.state?.alert ? null : 
+            <Alert message={routeProps.location.state.alert} />}
           />
 
           <Switch>
-            <Route path="/monsters/new" render={ () =>
-              <MonsterNew />
-            } />
+            <Route path="/monsters/new" component={MonsterNew} />
             <Route path="/monsters/:id/edit" render={ routeProps =>
               <MonsterEdit {...routeProps} />
             } />
             <Route path="/monsters/:id" render={ routeProps =>
               <Monster {...routeProps} />
             } />
-            <Route exact path="/" render={ () =>
-              <Monsters />
-            } />
+            <Route exact path="/" component={Monsters} />
             <Route path="/404" component={NotFound} />
             <Route component={NotFound} />
           </Switch>
