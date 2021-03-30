@@ -14,7 +14,7 @@ const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, 
   const handleChange = e => 
     setMonster({
       ...monster, 
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.valueAsNumber || e.target.value
     });
 
   const handleSubmit = async e => {
