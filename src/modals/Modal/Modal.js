@@ -1,10 +1,10 @@
 import {createContext, useContext} from 'react';
 
-export const ModalContext = createContext();
+export const SetModalContext = createContext();
 
-const Modal = ({activated, closeModal, title, render}) => {
+const Modal = ({activated, title, render}) => {
 
-  const setModal = useContext(ModalContext);
+  const setModal = useContext(SetModalContext);
 
   return !activated? null :
     <>

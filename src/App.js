@@ -6,10 +6,10 @@ import Monster from './pages/Monster/Monster';
 import MonsterEdit from './pages/MonsterEdit/MonsterEdit';
 import MonsterNew from './pages/MonsterNew/MonsterNew';
 import NotFound from './pages/NotFound/NotFound';
-import {ModalContext} from './modals/Modal/Modal';
+import {SetModalContext} from './modals/Modal/Modal';
 import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
-import Redirector, {RedirectContext} from './components/Redirector/Redirector';
+import Redirector, {SetRedirectContext} from './components/Redirector/Redirector';
 import Alert from './components/Alert/Alert';
 
 const App = () => {
@@ -18,8 +18,8 @@ const App = () => {
   const [modal, setModal] = useState(false);
 
   return (
-    <RedirectContext.Provider value={setRedirect}>
-      <ModalContext.Provider value={setModal}>
+    <SetRedirectContext.Provider value={setRedirect}>
+      <SetModalContext.Provider value={setModal}>
         <Offline activated={modal==='offline'} />
         <InternalServerError activated={modal==='internal_server_error'} />
 
@@ -52,8 +52,8 @@ const App = () => {
             <Route component={NotFound} />
           </Switch>
         </main>
-      </ModalContext.Provider>
-    </RedirectContext.Provider>
+      </SetModalContext.Provider>
+    </SetRedirectContext.Provider>
   );
 }
 

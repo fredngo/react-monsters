@@ -1,10 +1,10 @@
 import {useEffect, createContext, useContext} from 'react';
 
-export const RedirectContext = createContext();
+export const SetRedirectContext = createContext();
 
 const Redirector = ({redirect, location, history}) => {
 
-  const setRedirect = useContext(RedirectContext);
+  const setRedirect = useContext(SetRedirectContext);
 
   useEffect( () => {
     const {path, alert} = redirect;

@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import MonsterRow from '../../components/MonsterRow/MonsterRow';
-import {ModalContext} from '../../modals/Modal/Modal';
+import {SetModalContext} from '../../modals/Modal/Modal';
 
 const Monsters = () => {
 
-  const setModal = useContext(ModalContext);
+  const setModal = useContext(SetModalContext);
 
   const [fetching, setFetching] = useState(false);
   const [monsters, setMonsters] = useState([]);
