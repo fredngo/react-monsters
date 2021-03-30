@@ -1,9 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
-const Monster = ({match, setRedirect, setModal}) => {
+import RedirectContext from '../../components/RedirectContext/RedirectContext';
+
+const Monster = ({match, setModal}) => {
+
+  const setRedirect = useContext(RedirectContext);
 
   const [monster, setMonster] = useState({});
 
@@ -33,7 +37,7 @@ const Monster = ({match, setRedirect, setModal}) => {
     const {data} = await MonstersAPI.destroy(monster.id);
 
     if (data)
-    setRedirect({
+      setRedirect({
         path: '/',
         alert: 'Monster was successfully deleted.'
       });

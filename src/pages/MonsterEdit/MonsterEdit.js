@@ -1,10 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
+import RedirectContext from '../../components/RedirectContext/RedirectContext';
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
 
-const MonsterEdit = ({match, setRedirect, setModal}) => {
+const MonsterEdit = ({match, setModal}) => {
+
+  const setRedirect = useContext(RedirectContext);
 
   const [monster, setMonster] = useState({});
 

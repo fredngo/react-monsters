@@ -10,6 +10,7 @@ import InternalServerError from './modals/InternalServerError/InternalServerErro
 import Offline from './modals/Offline/Offline';
 import Redirector from './components/Redirector/Redirector';
 import Alert from './components/Alert/Alert';
+import RedirectContext from './components/RedirectContext/RedirectContext';
 
 const App = () => {
 
@@ -17,7 +18,7 @@ const App = () => {
   const [modal, setModal] = useState(false);
 
   return (
-    <>
+    <RedirectContext.Provider value={setRedirect}>
       { modal === 'offline' ? <Offline closeModal={() => setModal(false)} /> : null }
       { modal === 'internal_server_error' ? <InternalServerError closeModal={() => setModal(false)} /> : null }
 
@@ -38,22 +39,22 @@ const App = () => {
 
         <Switch>
           <Route path="/monsters/new" render={ () =>
-            <MonsterNew setRedirect={setRedirect} setModal={setModal} />
+            <MonsterNew setModal={setModal} />
           } />
           <Route path="/monsters/:id/edit" render={ routeProps =>
-            <MonsterEdit setRedirect={setRedirect} setModal={setModal} {...routeProps} />
+            <MonsterEdit setModal={setModal} {...routeProps} />
           } />
           <Route path="/monsters/:id" render={ routeProps =>
-            <Monster setRedirect={setRedirect} setModal={setModal} {...routeProps} />
+            <Monster setModal={setModal} {...routeProps} />
           } />
           <Route exact path="/" render={ () =>
-            <Monsters setRedirect={setRedirect} setModal={setModal} />
+            <Monsters setModal={setModal} />
           } />
           <Route path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>
       </main>
-    </>
+    </RedirectContext.Provider>
   );
 }
 
