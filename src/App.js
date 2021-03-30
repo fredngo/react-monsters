@@ -9,9 +9,8 @@ import NotFound from './pages/NotFound/NotFound';
 import {ModalContext} from './modals/Modal/Modal';
 import InternalServerError from './modals/InternalServerError/InternalServerError';
 import Offline from './modals/Offline/Offline';
-import Redirector from './components/Redirector/Redirector';
+import Redirector, {RedirectContext} from './components/Redirector/Redirector';
 import Alert from './components/Alert/Alert';
-import RedirectContext from './components/RedirectContext/RedirectContext';
 
 const App = () => {
 

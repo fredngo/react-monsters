@@ -1,6 +1,6 @@
-import {useEffect, useContext} from 'react';
+import {useEffect, createContext, useContext} from 'react';
 
-import RedirectContext from '../RedirectContext/RedirectContext';
+export const RedirectContext = createContext();
 
 const Redirector = ({redirect, location, history}) => {
 

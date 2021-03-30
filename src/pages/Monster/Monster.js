@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import {ModalContext} from '../../modals/Modal/Modal';
-import RedirectContext from '../../components/RedirectContext/RedirectContext';
+import {RedirectContext} from '../../components/Redirector/Redirector';
 
 const Monster = ({match}) => {
 
