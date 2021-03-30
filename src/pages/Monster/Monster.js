@@ -13,7 +13,7 @@ const Monster = ({match, setRedirect, setModal}) => {
         const {data} = await MonstersAPI.show(match.params.id);
 
         if (data)
-          setMonster(data)
+          setMonster(data);
         else {
           setRedirect({
             path: '/404',
