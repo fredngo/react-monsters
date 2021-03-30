@@ -1,10 +1,8 @@
-import {Component} from 'react';
+import {useEffect} from 'react';
 
-class Redirector extends Component {
+const Redirector = ({redirect, location, history, setRedirect}) => {
 
-  componentDidUpdate() {
-    //console.log('Redirector::componentDidUpdate')
-    const {redirect, location, history, setRedirect} = this.props;
+  useEffect( () => {
     const {path, alert} = redirect;
     if (!path) return;
 
@@ -20,11 +18,9 @@ class Redirector extends Component {
       setRedirect({});
       setTimeout( () => history.replace({state: {}}), 4000);
     }
-  }
+  }, [redirect, location, history, setRedirect]);
 
-  render() {
-    return null;
-  }
+  return null;
 }
 
 export default Redirector;
