@@ -1,75 +1,71 @@
-import {Component} from 'react';
+import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 
-class Monster extends Component {
+const Monster = ({match, setRedirect, setModal}) => {
 
-  state = {
-    monster: {},
-  }
-  
-  async componentDidMount() {
-    try {
-      const {data} = await MonstersAPI.show(this.props.match.params.id);
+  const [monster, setMonster] = useState({});
 
-      if (data) {
-        this.setState({monster: data});
+  useEffect( () => {
+    const fetchData = async () => {
+      try {
+        const {data} = await MonstersAPI.show(match.params.id);
+
+        if (data)
+          setMonster(data)
+        else {
+          setRedirect({
+            path: '/404',
+            alert: 'Monster was not found.'
+          });
+        }
       }
-      else {
-        this.props.setRedirect({
-          path: '/404',
-          alert: 'Monster was not found.'
-        });
+      catch {
+        setModal('offline');
       }
     }
-    catch {
-      this.props.setModal('offline');
-    }
-  }
+    fetchData();
+  }, [match.params.id, setRedirect, setModal]);
 
-  handleDelete = async e => {
+  const handleDelete = async e => {
     e.preventDefault();
-    const {data} = await MonstersAPI.destroy(this.state.monster.id);
+    const {data} = await MonstersAPI.destroy(monster.id);
 
     if (data)
-    this.props.setRedirect({
+    setRedirect({
         path: '/',
         alert: 'Monster was successfully deleted.'
       });
     else {
-      this.props.setModal('internal_server_error');
+      setModal('internal_server_error');
     }
   }
 
-  render() {
-    if (!this.state.monster.id) return null;
+  if (!monster.id) return null;
 
-    const {id, name, home, creepiness, bio} = this.state.monster;
-    const imgSrc = `https://robohash.org/${id}?set=set2&size=300x300`;
+  const {id, name, home, creepiness, bio} = monster;
+  const imgSrc = `https://robohash.org/${id}?set=set2&size=300x300`;
 
-    return (
-      <>
-        <div className="container">
-          <div className="m-5 card text-center">
-            <h3 className="card-header">
-              {name}
-            </h3>
-            <div className="card-body">
-              <img className="m-3" src={imgSrc} alt='Monster Pic' />
-              <h5 className="card-title">{home}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Creepiness: {creepiness}</h6>
-              <p className="card-text">{bio}</p>
+  return (
+    <div className="container">
+      <div className="m-5 card text-center">
+        <h3 className="card-header">
+          {name}
+        </h3>
+        <div className="card-body">
+          <img className="m-3" src={imgSrc} alt='Monster Pic' />
+          <h5 className="card-title">{home}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">Creepiness: {creepiness}</h6>
+          <p className="card-text">{bio}</p>
 
-              <Link className="btn btn-primary" to={`/monsters/${id}/edit`}>Edit</Link>
-              &nbsp;
-              <Link className="btn btn-danger" to={`/monsters/${id}`} onClick={this.handleDelete}>Delete</Link>
-            </div>
-          </div>
+          <Link className="btn btn-primary" to={`/monsters/${id}/edit`}>Edit</Link>
+          &nbsp;
+          <Link className="btn btn-danger" to={`/monsters/${id}`} onClick={handleDelete}>Delete</Link>
         </div>
-      </>
-    );
-  }
+      </div>
+    </div>
+  );
 }
 
 export default Monster;
