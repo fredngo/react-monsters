@@ -2,7 +2,8 @@ import {createContext} from 'react';
 
 export const ModalContext = createContext();
 
-const Modal = ({closeModal, title, render}) => (
+const Modal = ({activated, closeModal, title, render}) => (
+  !activated? null :
   <>
     <div className="modal-backdrop fade show"></div>
     <div className="modal" style={{display:"block"}}>

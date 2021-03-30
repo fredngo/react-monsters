@@ -20,8 +20,8 @@ const App = () => {
   return (
     <RedirectContext.Provider value={setRedirect}>
       <ModalContext.Provider value={setModal}>
-        { modal === 'offline' ? <Offline closeModal={() => setModal(false)} /> : null }
-        { modal === 'internal_server_error' ? <InternalServerError closeModal={() => setModal(false)} /> : null }
+        <Offline activated={modal==='offline'} closeModal={() => setModal(false)} />
+        <InternalServerError activated={modal==='internal_server_error'} closeModal={() => setModal(false)} />
 
         <Route 
           render={ routeProps => <Redirector redirect={redirect} {...routeProps} />}
