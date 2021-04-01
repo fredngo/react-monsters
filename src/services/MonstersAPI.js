@@ -64,6 +64,6 @@ const MonstersAPI = {
   create,
   update,
   destroy
-}
+};
 
 export default MonstersAPI;

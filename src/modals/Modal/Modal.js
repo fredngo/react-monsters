@@ -27,6 +27,4 @@ const Modal = ({activated, title, render}) => {
     </>
 }
 
-
-
 export default Modal;

@@ -1,6 +1,6 @@
 import Modal from '../Modal/Modal';
 
-const Offline = ({activated}) => (
+const InternalServerError = ({activated}) => (
   <Modal activated={activated} title="Oops!" render={ () => (
     <>
       <p>Unfortunately an error has occured on our end.</p>
@@ -9,4 +9,4 @@ const Offline = ({activated}) => (
   ) } />
 );
 
-export default Offline;
+export default InternalServerError;
