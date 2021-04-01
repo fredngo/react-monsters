@@ -26,10 +26,9 @@ const App = () => {
       </header>
       
       <main>
-        <Route render={ routeProps =>
-          !routeProps.location.state?.alert ? null : 
-          <Alert message={routeProps.location.state.alert} />}
-        />
+        <Route render={ routeProps => 
+          <Alert {...routeProps} /> 
+        }/>
 
         <Switch>
           <Route path="/monsters/new" component={MonsterNew} />
