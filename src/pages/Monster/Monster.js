@@ -1,16 +1,15 @@
 import {useState, useEffect, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import {SetModalContext} from '../../modals/Modal/Modal';
-import {SetRedirectContext} from '../../components/Redirector/Redirector';
 
 const Monster = ({match}) => {
 
   const setModal = useContext(SetModalContext);
-  const setRedirect = useContext(SetRedirectContext);
 
   const [monster, setMonster] = useState({});
+  const [redirect, setRedirect] = useState({});
 
   useEffect( () => {
     const fetchData = async () => {
@@ -21,7 +20,7 @@ const Monster = ({match}) => {
           setMonster(data);
         else {
           setRedirect({
-            path: '/404',
+            pathname: '/404',
             alert: 'Monster was not found.'
           });
         }
@@ -31,7 +30,7 @@ const Monster = ({match}) => {
       }
     }
     fetchData();
-  }, [match.params.id, setRedirect, setModal]);
+  }, [match.params.id, setModal]);
 
   const handleDelete = async e => {
     e.preventDefault();
@@ -39,13 +38,19 @@ const Monster = ({match}) => {
 
     if (data)
       setRedirect({
-        path: '/',
+        pathname: '/',
         alert: 'Monster was successfully deleted.'
       });
     else {
       setModal('internal_server_error');
     }
   }
+
+  if (redirect.pathname)
+    return <Redirect to={{
+      pathname: redirect.pathname,
+      state: { alert: redirect.alert }
+    }} />
 
   if (!monster.id) return null;
 

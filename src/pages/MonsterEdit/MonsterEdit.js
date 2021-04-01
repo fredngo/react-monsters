@@ -1,16 +1,16 @@
 import {useState, useEffect, useContext} from 'react';
+import {Redirect} from 'react-router-dom';
 
 import MonstersAPI from '../../services/MonstersAPI';
 import MonsterForm from '../../components/MonsterForm/MonsterForm';
-import {SetRedirectContext} from '../../components/Redirector/Redirector';
 import {SetModalContext} from '../../modals/Modal/Modal';
 
 const MonsterEdit = ({match}) => {
 
   const setModal = useContext(SetModalContext);
-  const setRedirect = useContext(SetRedirectContext);
 
   const [monster, setMonster] = useState({});
+  const [redirect, setRedirect] = useState({});
 
   const callApi = () => MonstersAPI.update(monster);
 
@@ -25,7 +25,7 @@ const MonsterEdit = ({match}) => {
           setMonster(data);
         else
           setRedirect({
-            path: '/404',
+            pathname: '/404',
             alert: 'Monster was not found.'
           });
       }
@@ -34,7 +34,13 @@ const MonsterEdit = ({match}) => {
       }
     }
     fetchData();
-  }, [match.params.id, setRedirect, setModal]);
+  }, [match.params.id, setModal]);
+
+  if (redirect.pathname)
+    return <Redirect to={{
+      pathname: redirect.pathname,
+      state: { alert: redirect.alert }
+    }} />
 
   return (
     <div className="container">

@@ -1,15 +1,14 @@
 import {useState, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
-import {SetRedirectContext} from '../../components/Redirector/Redirector';
 import {SetModalContext} from '../../modals/Modal/Modal';
 
 const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, redirectTo, cancelPath}) => {
 
   const setModal = useContext(SetModalContext);
-  const setRedirect = useContext(SetRedirectContext);
 
   const [errors, setErrors] = useState([]);
+  const [redirect, setRedirect] = useState({});
 
   const handleChange = e => 
     setMonster({
@@ -24,7 +23,7 @@ const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, 
 
       if (data)
         setRedirect({
-          path: redirectTo(data),
+          pathname: redirectTo(data),
           alert: redirectNotice
         });
       else
@@ -34,6 +33,12 @@ const MonsterForm = ({monster, setMonster, callApi, buttonText, redirectNotice, 
       setModal('offline');
     }
   }
+
+  if (redirect.pathname)
+    return <Redirect to={{
+      pathname: redirect.pathname,
+      state: { alert: redirect.alert }
+    }} />
 
   return (
     <form onSubmit={handleSubmit}>
