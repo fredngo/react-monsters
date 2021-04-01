@@ -7,10 +7,6 @@ const MonsterNew = () =>  {
 
   const [monster, setMonster] = useState({});
 
-  const callApi = () => MonstersAPI.create(monster);
-
-  const redirectTo = monster => `/monsters/${monster.id}`;
-
   return (
     <div className="container">
       <div className="row">
@@ -20,10 +16,10 @@ const MonsterNew = () =>  {
         <MonsterForm
           monster={monster}
           setMonster={setMonster}
-          callApi={callApi}
+          callApi={() => MonstersAPI.create(monster)}
           buttonText='Create Monster'
           redirectNotice='Monster was successfully created.'
-          redirectTo={redirectTo}
+          redirectTo={monster => `/monsters/${monster.id}`}
           cancelPath='/'
         />
       </div>

@@ -12,10 +12,6 @@ const MonsterEdit = ({match}) => {
   const [monster, setMonster] = useState({});
   const [redirect, setRedirect] = useState({});
 
-  const callApi = () => MonstersAPI.update(monster);
-
-  const redirectTo = () => `/monsters/${monster.id}`;
-
   useEffect( () => {
     const fetchData = async () =>{
       try {
@@ -54,10 +50,10 @@ const MonsterEdit = ({match}) => {
         <MonsterForm 
           monster={monster}
           setMonster={setMonster}
-          callApi={callApi}
+          callApi={() => MonstersAPI.update(monster)}
           buttonText='Update Monster'
           redirectNotice='Monster was successfully updated.'
-          redirectTo={redirectTo}
+          redirectTo={monster => `/monsters/${monster.id}`}
           cancelPath={`/monsters/${monster.id}`}
         />
       </div>
