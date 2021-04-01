@@ -27,6 +27,9 @@ const Monster = ({match}) => {
       }
       catch {
         setModal('offline');
+        setRedirect({
+          pathname: '/'
+        });
       }
     }
     fetchData();
